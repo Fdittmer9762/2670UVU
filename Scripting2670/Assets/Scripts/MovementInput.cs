@@ -5,26 +5,16 @@ using System;
 
 public class MovementInput : MonoBehaviour {
 
-    Action KeyAction;                                           //action used to move character controller
+    public static Action<float> KeyAction;                          //action used to move character controller
 
-    private void Start()
-    {
-        KeyAction = Move;                                       //Assigns Move to Keyaction so when something calls for the keyaction event it will run the Move method
+    void Update() {
+        MoveInput();
     }
 
-    void Update () {
-        MoveInput();                                            //runs Move Input Every Frame
-    }
-
-    void MoveInput() {                                          //checks for input
-        if (Input.GetKey(KeyCode.LeftArrow))                    //Tests for input from left arrow key
+    void MoveInput() {                                              //checks for input
+        if (KeyAction != null)                                      //Tests for input from left arrow key and calls the action KeyAction when true
         {
-            KeyAction();                                        //Calls action KeyAction when 
+            KeyAction(Input.GetAxis("Horizontal"));                 //feeds the horizontal input into the action as a float
         }
-    }
-
-    private void Move()
-    {
-        Debug.Log("Left Arrow");                                //for testing
     }
 }
