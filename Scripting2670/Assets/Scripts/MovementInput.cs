@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System;
+using System;                                                       //Naemspace contains the event system: allows actions to work
 
 public class MovementInput : MonoBehaviour {
 
