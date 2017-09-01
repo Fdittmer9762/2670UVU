@@ -8,8 +8,13 @@ public class FlipCharacter : MonoBehaviour {
     Vector3 rotValue;
 
 	void Start () {
-        MovementInput.KeyAction += Flip;            //**Remember to overide with inheritance**
-	}
+        PlayButton.Play += OnPlayAction;
+        }
+
+    void OnPlayAction()
+    {
+        MovementInput.KeyAction += Flip;                     //Creates a ref to the movement script and the KeyAction event
+    }
 
     void Flip(float obj) {
         if (obj > 0){                               //moving right

@@ -7,9 +7,14 @@ public class AnimateCharacter : MonoBehaviour {
 
     Animator anims;
 
-    private void Start(){
+    void Start(){
         anims = GetComponent<Animator>();
-        MovementInput.KeyAction += Animate;
+        PlayButton.Play += OnPlayAction;
+    }
+
+    void OnPlayAction()
+    {
+        MovementInput.KeyAction += Animate;                     //Creates a ref to the movement script and the KeyAction event
     }
 
     private void Animate(float obj)

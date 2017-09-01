@@ -10,8 +10,12 @@ public class MoveCharacter : MonoBehaviour {
 
 	void Start () {
         cc = GetComponent<CharacterController>();           //gets the charactercontroller from unitys hiearchy and sets it to cc (must be located on the same object)
-        MovementInput.KeyAction += Move;                     //Creates a ref to the movement script and the KeyAction event
+        PlayButton.Play += OnPlayAction;
 	}
+
+    void OnPlayAction() {
+        MovementInput.KeyAction += Move;                     //Creates a ref to the movement script and the KeyAction event
+    }
 
     void Move(float _movement) {                            //recieves the horizontal input from the keyaction call
         tempMove.x = _movement * speed * Time.deltaTime;    //sets the tempMove to the moement(player input passed by the action), speed(), and delta time binds the speed to the second and not the frame
