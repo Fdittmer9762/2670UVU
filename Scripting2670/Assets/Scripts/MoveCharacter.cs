@@ -15,6 +15,7 @@ public class MoveCharacter : MonoBehaviour {
 
     void OnPlayAction() {
         MovementInput.KeyAction += Move;                     //Creates a ref to the movement script and the KeyAction event
+        PlayButton.Play -= OnPlayAction;
     }
 
     void Move(float _movement) {                            //recieves the horizontal input from the keyaction call

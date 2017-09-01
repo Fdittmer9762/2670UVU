@@ -9,11 +9,12 @@ public class FlipCharacter : MonoBehaviour {
 
 	void Start () {
         PlayButton.Play += OnPlayAction;
-        }
+    }
 
     void OnPlayAction()
     {
         MovementInput.KeyAction += Flip;                     //Creates a ref to the movement script and the KeyAction event
+        PlayButton.Play -= OnPlayAction;
     }
 
     void Flip(float obj) {
