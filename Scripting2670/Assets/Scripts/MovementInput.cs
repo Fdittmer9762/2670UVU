@@ -6,6 +6,7 @@ using System;                                                       //Naemspace 
 public class MovementInput : MonoBehaviour {
 
     public static Action<float> KeyAction;                          //action used to move character controller
+    public static Action JumpAction;
 
     void Update() {
         MoveInput();
@@ -16,5 +17,10 @@ public class MovementInput : MonoBehaviour {
         {
             KeyAction(Input.GetAxis("Horizontal"));                 //feeds the horizontal input into the action as a float
         }
+        if (Input.GetKeyDown(KeyCode.Space) && JumpAction != null)
+        {
+            JumpAction();
+        }
+
     }
 }
