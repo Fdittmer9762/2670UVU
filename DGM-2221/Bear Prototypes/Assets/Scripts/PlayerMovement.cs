@@ -10,6 +10,9 @@ public class PlayerMovement : MonoBehaviour {
     public float jumpForce = .2f;
     Vector3 tempPos;
 
+    private int JumpCount = 0;                      //for Jump Limit ****Remove Later*****
+    private int JumpLimit = 1;                      //for Jump Limit ****Remove Later*****
+
     void Start()
     {
         playerCC = GetComponent<CharacterController>();
@@ -34,9 +37,25 @@ public class PlayerMovement : MonoBehaviour {
         tempPos.y -= gravity * Time.deltaTime;
     }
 
-    void Jump() {
-        tempPos.y = jumpForce;
-        print("Jump!");
+    void Jump() {                                                                               //For Double Jump
+        if (playerCC.isGrounded) {
+            JumpCount = 0;
+            print(JumpCount);                                                                   //testing
+        }
+        if (JumpCount <= JumpLimit) {
+            tempPos.y = jumpForce;
+            JumpCount++;
+            print("Jumping!");                                                                  //testing
+        }
+        print("Jump Called!");                                                                  //testing
     }
+
+    /*void Jump()                                                                               //One Jump Only
+    {
+        if (playerCC.isGrounded) {
+            tempPos.y = jumpForce;
+            //print("Jump!");
+        }
+    }*/
 
 }
