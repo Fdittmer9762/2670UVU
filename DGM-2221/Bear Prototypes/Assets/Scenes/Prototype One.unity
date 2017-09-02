@@ -108,6 +108,58 @@ NavMeshSettings:
     tileSize: 256
     accuratePlacement: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &1006821195
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1006821197}
+  - component: {fileID: 1006821196}
+  - component: {fileID: 1006821198}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1006821196
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1006821195}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02945be7607f81a4b81828375dd968e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1006821197
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1006821195}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1006821198
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1006821195}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd9bc4a6695d16a48be19cca7c07a24d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1156875006
 GameObject:
   m_ObjectHideFlags: 0
@@ -203,7 +255,6 @@ GameObject:
   - component: {fileID: 1501451254}
   - component: {fileID: 1501451253}
   - component: {fileID: 1501451258}
-  - component: {fileID: 1501451259}
   m_Layer: 0
   m_Name: PlayerPrototype
   m_TagString: Untagged
@@ -301,21 +352,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1501451252}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4ed993caa717a194a98cbde00dd961f0, type: 3}
+  m_Script: {fileID: 11500000, guid: bde928921b146a6409c7311f80c52531, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   playerCC: {fileID: 0}
---- !u!114 &1501451259
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1501451252}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 02945be7607f81a4b81828375dd968e3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  gravity: 0.5
+  jumpForce: 0.2
 --- !u!1 &1663659204
 GameObject:
   m_ObjectHideFlags: 0
