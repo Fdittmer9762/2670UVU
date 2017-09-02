@@ -10,8 +10,8 @@ public class PlayerMovement : MonoBehaviour {
     public float jumpForce = .2f;
     Vector3 tempPos;
 
-    private int JumpCount = 0;                      //for Jump Limit ****Remove Later*****
-    private int JumpLimit = 1;                      //for Jump Limit ****Remove Later*****
+    private int JumpCount = 0;                                                                  //for Jump Limit ****Remove Later*****
+    private int JumpLimit = 1;                                                                  //for Jump Limit ****Remove Later*****
 
     void Start()
     {
@@ -19,7 +19,7 @@ public class PlayerMovement : MonoBehaviour {
         ControlManager.EnableDefaultControls += OnPlayAction;                               
     }
 
-    void OnPlayAction() //**think of better name for enable default controls**
+    void OnPlayAction()                                                                         //**think of better name for enable default controls**
     {
         PlayerMoveInput.HorizontalInput += Movement;                                            //enables movement (possibly make its own method for easier reuse) **don't over complicate things early**
         PlayerMoveInput.JumpAction += Jump;                                                     //enables jumping  (possibly make its own method for easier reuse)
@@ -33,21 +33,21 @@ public class PlayerMovement : MonoBehaviour {
         playerCC.Move(tempPos);
     }
 
-    void ApplyGravity() {
+    void ApplyGravity() {                                                                       //Applys Gravity to Object when called using character controller
         tempPos.y -= gravity * Time.deltaTime;
     }
 
     void Jump() {                                                                               //For Double Jump
         if (playerCC.isGrounded) {
             JumpCount = 0;
-            print(JumpCount);                                                                   //testing
+            //print(JumpCount);                                                                   //testing
         }
         if (JumpCount <= JumpLimit) {
             tempPos.y = jumpForce;
             JumpCount++;
-            print("Jumping!");                                                                  //testing
+            //print("Jumping!");                                                                  //testing
         }
-        print("Jump Called!");                                                                  //testing
+        //print("Jump Called!");                                                                  //testing
     }
 
     /*void Jump()                                                                               //One Jump Only
