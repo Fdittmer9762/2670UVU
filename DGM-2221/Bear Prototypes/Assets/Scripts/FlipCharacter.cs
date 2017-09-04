@@ -6,10 +6,12 @@ public class FlipCharacter : MonoBehaviour {
 
     Quaternion myRotate;
     Vector3 rotValue;
+    public float orientationOffset;
 
     void Start()
     {
         ControlManager.EnableDefaultControls += OnPlayAction;
+        Orientator.OrientAction += ReOrientate;
     }
 
     void OnPlayAction()
@@ -21,13 +23,18 @@ public class FlipCharacter : MonoBehaviour {
     void Flip(float obj)
     {
         if (obj > 0) {                              //moving right
-            rotValue.y = 0;                         //Turn Character
+            rotValue.y = orientationOffset;                         //Turn Character
         }
         if (obj < 0) {                              //moving left
-            rotValue.y = 180;
+            rotValue.y = 180 + orientationOffset;
         }
         myRotate.eulerAngles = rotValue;
         transform.rotation = myRotate;
+    }
+
+    void ReOrientate(float angle) {
+        orientationOffset = angle* 180;
+        //print("orientation angle : " + orientationOffset);
     }
 
 }
