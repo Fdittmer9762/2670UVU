@@ -33,8 +33,8 @@ public class FlipCharacter : MonoBehaviour {
     }
 
     void ReOrientate(float angle) {
-        orientationOffset = angle* 180;
-        //print("orientation angle : " + orientationOffset);
+        orientationOffset = angle;
+        print("orientation angle : " + orientationOffset);
     }
 
 }

@@ -16,7 +16,8 @@ public class Orientator : MonoBehaviour {
     private void OnTriggerEnter()
     {
         if (OrientAction != null) {
-            OrientAction(objOrientation.rotation.y );
+            //OrientAction(objOrientation.rotation.y );         gameObject.rotation.y is giving me wierd numbers, nolinear scaling decimal. (unusable)
+            OrientAction(yOrientation);                         //uses publicly defined float to sub for the nousable data above 
             //print(transform.rotation.y);
         }
     }

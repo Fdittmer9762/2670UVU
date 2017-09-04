@@ -10,6 +10,9 @@ public class PlayerMovement : MonoBehaviour {
     public float jumpForce = .2f;
     Vector3 tempPos;
 
+    float offsetX;
+    float offsetZ;
+
     private int JumpCount = 0;                                                                  //for Jump Limit ****Remove Later*****
     private int JumpLimit = 1;                                                                  //for Jump Limit ****Remove Later*****
 
@@ -23,14 +26,25 @@ public class PlayerMovement : MonoBehaviour {
     {
         PlayerMoveInput.HorizontalInput += Movement;                                            //enables movement (possibly make its own method for easier reuse) **don't over complicate things early**
         PlayerMoveInput.JumpAction += Jump;                                                     //enables jumping  (possibly make its own method for easier reuse)
+        Orientator.OrientAction += MovementOffsetSet;
+        offsetX = speed;
         ControlManager.EnableDefaultControls -= OnPlayAction;
     }
 
     void Movement(float obj)
     {
         ApplyGravity();
-        tempPos.x = obj * speed * Time.deltaTime;
+        //tempPos.x = obj * speed * Time.deltaTime;
+        tempPos.x = obj * offsetX * Time.deltaTime;     
+        tempPos.z = obj * offsetZ * Time.deltaTime;
         playerCC.Move(tempPos);
+    }
+
+    void MovementOffsetSet(float offset) {
+        offsetX = Mathf.Cos(offset) * speed;
+        offsetZ = Mathf.Tan(offset) * offsetX;
+        //offsetZ = Mathf.Sin(offset) * speed;
+        print("X: " + offsetX + " Y: " + offsetZ);
     }
 
     void ApplyGravity() {                                                                       //Applys Gravity to Object when called using character controller
@@ -40,6 +54,7 @@ public class PlayerMovement : MonoBehaviour {
     void Jump() {                                                                               //For Double Jump
         if (playerCC.isGrounded) {
             JumpCount = 0;
+            tempPos.y = 0;
             //print(JumpCount);                                                                   //testing
         }
         if (JumpCount <= JumpLimit) {
