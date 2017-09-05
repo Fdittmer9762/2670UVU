@@ -1,8 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
-public class InteractionManager : MonoBehaviour {
+public class InteractionManager : MonoBehaviour {                           //**place on interactable object**
+
+    public int interactType = 0;                                          //(1. activate 2. grab 3.fishing) defines what kind of interaction will take place, set manually
+
+    public static Action<int> InteractAction;                             //event that fires when object is interacted with
 
     void OnTriggerEnter (){
         PlayerMoveInput.InteractAction += InteractCalled;
@@ -15,6 +20,9 @@ public class InteractionManager : MonoBehaviour {
     }
 
     void InteractCalled() {
-        print("Interacting");
+        if (InteractAction != null) {
+            InteractAction(interactType);
+        }
+        //print("Interacting");
     }
 }
