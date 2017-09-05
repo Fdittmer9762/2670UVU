@@ -21,6 +21,7 @@ public class FishingManager : MonoBehaviour {
         print("Stop Fishing");
         if (stopFishing!= null) {
             stopFishing();
+            PlayerMoveInput.InteractAction -= StopFishing;
         }
     }
 
