@@ -33,7 +33,8 @@ public class FlipCharacter : MonoBehaviour {
     }
 
     void ReOrientate(float angle) {
-        orientationOffset = angle;
+        //angle *= Mathf.Deg2Rad;
+        orientationOffset = -angle;
         print("orientation angle : " + orientationOffset);
     }
 
