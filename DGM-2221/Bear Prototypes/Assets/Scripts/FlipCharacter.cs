@@ -10,14 +10,20 @@ public class FlipCharacter : MonoBehaviour {
 
     void Start()
     {
-        ControlManager.EnableDefaultControls += OnPlayAction;
+        ControlManager.EnableDefaultControls += OnDefaultControls;
         Orientator.OrientAction += ReOrientate;
     }
 
-    void OnPlayAction()
-    {
-        PlayerMoveInput.HorizontalInput += Flip;
-        ControlManager.EnableDefaultControls += OnPlayAction;
+    void OnDefaultControls(){
+        PlayerMoveInput.HorizontalInput += Flip;                                                //Enables flipping of the character/Player gameobject
+        ControlManager.EnableDefaultControls -= OnDefaultControls;                              //unsub from enable default controls, Prevents Issues with the control input
+        ControlManager.EnableFishingControls += OnFishing;                                      //Subs to on fishing event call
+    }
+
+    void OnFishing() {
+        PlayerMoveInput.HorizontalInput -= Flip;                                                //Dosabes flip script, prevents player from flipping around
+        ControlManager.EnableFishingControls -= OnFishing;                                      //unsub from the onfishing event call, prevents issues
+        ControlManager.EnableDefaultControls += OnDefaultControls;                              //subs to the default controls call, allows default controlls to be enabled
     }
 
     void Flip(float obj)

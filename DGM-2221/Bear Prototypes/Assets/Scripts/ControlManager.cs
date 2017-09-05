@@ -6,6 +6,9 @@ using System;
 public class ControlManager : MonoBehaviour {
 
     public static Action EnableDefaultControls;
+    public static Action EnableFishingControls;
+    public static Action EnableGrabControls;
+    public static Action ActivateAction;
 
 	void Start () {                                                 
         //EnableControl();                                                //enables default controls on startup (will be changed later)
@@ -19,9 +22,16 @@ public class ControlManager : MonoBehaviour {
         }
     }
 
+    void EnableFishing() {
+        if (EnableFishingControls != null) {
+            EnableFishingControls();
+        }
+    }
+
     void changeControls(int interactType){                              //(1. activate 2. grab 3.fishing)
         switch (interactType) {
             case 3:                                                     //----Fishing-----//
+                EnableFishing();                                        //calls event to change controls on lisining scripts (PlayerMovemvement, )
                 print("Fishing Called");
                 break;
             case 2:                                                     //------Grab------//
@@ -31,7 +41,7 @@ public class ControlManager : MonoBehaviour {
                 print("Activate Called");
                 break;
             default:                                                    //-----Default----//
-                EnableDefaultControls();
+                EnableControl();
                 print("Default Called");
                 break;
         }

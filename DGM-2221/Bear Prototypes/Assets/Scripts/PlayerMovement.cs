@@ -23,17 +23,28 @@ public class PlayerMovement : MonoBehaviour {
     void Start()
     {
         playerCC = GetComponent<CharacterController>();                                         //sets the ref for the character controller
-        ControlManager.EnableDefaultControls += OnPlayAction;                                   //Listens for the event to enable the scripts
+        ControlManager.EnableDefaultControls += OnDefaultControls;                              //Listens for the event to enable the scripts
     }
 
-    void OnPlayAction()                                                                         //Enables Controls  ****think of better name for enable default controls****
+    void OnDefaultControls()                                                                    //Enables Controls  ****think of better name for enable default controls****
     {
         PlayerMoveInput.HorizontalInput += Movement;                                            //enables movement (possibly make its own method for easier reuse) **don't over complicate things early**
         PlayerMoveInput.JumpAction += Jump;                                                     //enables jumping  (possibly make its own method for easier reuse)
         Orientator.OrientAction += MovementOffsetSet;                                           //listens to the orientator for the action call
         PlatformMovementTracking.MovePlayerEvent += OffsetPlayerPos;                            //listens to the platform movement tracking to find how much the current platform has moved
         offsetX = speed;                                                                        //prevents issues with the x offset **** first platform must be at 0 degrees y axis
-        ControlManager.EnableDefaultControls -= OnPlayAction;                                   //UnSubs from the play action button to prevent it from subbing multiple times
+        ControlManager.EnableDefaultControls -= OnDefaultControls;                              //UnSubs from the play action button to prevent it from subbing multiple times
+        ControlManager.EnableFishingControls += OnFishing;
+    }
+
+    void OnFishing() {
+        PlayerMoveInput.HorizontalInput -= Movement;                                            //disables Walking
+        PlayerMoveInput.JumpAction -= Jump;                                                     //disables Jumping
+        Orientator.OrientAction -= MovementOffsetSet;                                           //unsubs from orient action; Just in case
+        PlatformMovementTracking.MovePlayerEvent -= OffsetPlayerPos;                            // **may want to enable** could fish from a moving platform (disabled now just in case)
+        ControlManager.EnableFishingControls -= OnFishing;                                      //unsubs from enable fishing controls, prevents issues
+        ControlManager.EnableDefaultControls += OnDefaultControls;                              //subs to default control change
+        StartCoroutine (OnMovementDisable());                                                   //Call when movement is disabled **allows camera to smooth into place (looks better)**
     }
 
     void Movement(float obj){
@@ -93,5 +104,14 @@ public class PlayerMovement : MonoBehaviour {
 
     void OffsetPlayerPos(Vector3 offset) {                                                      //used to move the character with the currentl platform (keeps it attached to the platform)
         playerCC.Move(-offset);                                                                 //moves player using the offset
+    }
+
+    IEnumerator OnMovementDisable() {
+        for (int i = 0; i < 40; i++)
+        {
+            PassLocation();
+            yield return null;
+        }
+
     }
 }
