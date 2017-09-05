@@ -22,7 +22,7 @@ public class PlayerMovement : MonoBehaviour {
         ControlManager.EnableDefaultControls += OnPlayAction;                               
     }
 
-    void OnPlayAction()                                                                         //**think of better name for enable default controls**
+    void OnPlayAction()//Enables Controls                                                       //**think of better name for enable default controls**
     {
         PlayerMoveInput.HorizontalInput += Movement;                                            //enables movement (possibly make its own method for easier reuse) **don't over complicate things early**
         PlayerMoveInput.JumpAction += Jump;                                                     //enables jumping  (possibly make its own method for easier reuse)
@@ -40,7 +40,8 @@ public class PlayerMovement : MonoBehaviour {
         playerCC.Move(tempPos);
     }
 
-    void MovementOffsetSet(float offset) {
+    void MovementOffsetSet(float offset){
+        offset *= Mathf.Deg2Rad;
         offsetX = Mathf.Cos(offset) * speed;
         offsetZ = Mathf.Tan(offset) * offsetX;
         //offsetZ = Mathf.Sin(offset) * speed;
