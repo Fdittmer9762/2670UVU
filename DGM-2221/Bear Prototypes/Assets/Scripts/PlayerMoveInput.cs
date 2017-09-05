@@ -7,6 +7,7 @@ public class PlayerMoveInput : MonoBehaviour {
 
     public static Action<float> HorizontalInput;
     public static Action JumpAction;
+    public static Action InteractAction;
 	
 	void Update () {
         PlayerInput();
@@ -15,6 +16,7 @@ public class PlayerMoveInput : MonoBehaviour {
     void PlayerInput() {
         HorizontalInputMethod();
         JumpInput();
+        InteractInput();
     }
 
     void HorizontalInputMethod() {
@@ -29,5 +31,13 @@ public class PlayerMoveInput : MonoBehaviour {
             JumpAction();
             //print("Jump Action Called");
         }
+    }
+
+    void InteractInput() {
+        if (Input.GetKeyDown(KeyCode.C) && InteractAction != null) {
+            InteractAction();
+            //print("Interact called");
+        }
+        //print("Interact method called");
     }
 }
