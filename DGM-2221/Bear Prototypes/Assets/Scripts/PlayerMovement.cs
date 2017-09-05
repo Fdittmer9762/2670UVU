@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class PlayerMovement : MonoBehaviour {
 
@@ -15,6 +16,8 @@ public class PlayerMovement : MonoBehaviour {
 
     private int JumpCount = 0;                                                                  //for Jump Limit ****Remove Later*****
     private int JumpLimit = 1;                                                                  //for Jump Limit ****Remove Later*****
+
+    public static Action<Vector3> PlayerLocationAction;
 
     void Start()
     {
@@ -34,10 +37,10 @@ public class PlayerMovement : MonoBehaviour {
     void Movement(float obj)
     {
         ApplyGravity();
-        //tempPos.x = obj * speed * Time.deltaTime;
         tempPos.x = obj * offsetX * Time.deltaTime;     
         tempPos.z = obj * offsetZ * Time.deltaTime;
         playerCC.Move(tempPos);
+        PassLocation(); //passes player location to other scripts
     }
 
     void MovementOffsetSet(float offset){
@@ -73,5 +76,13 @@ public class PlayerMovement : MonoBehaviour {
             //print("Jump!");
         }
     }*/
+
+    void PassLocation()//passes player location data to other scripts
+    {
+        if (PlayerLocationAction != null)
+        {
+            PlayerLocationAction(transform.position);
+        }
+    }
 
 }

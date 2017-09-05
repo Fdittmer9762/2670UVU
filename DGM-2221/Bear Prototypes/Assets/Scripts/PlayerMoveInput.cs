@@ -17,6 +17,7 @@ public class PlayerMoveInput : MonoBehaviour {
         HorizontalInputMethod();
         JumpInput();
         InteractInput();
+        //PassLocation();
     }
 
     void HorizontalInputMethod() {
@@ -40,4 +41,5 @@ public class PlayerMoveInput : MonoBehaviour {
         }
         //print("Interact method called");
     }
+
 }

@@ -15,6 +15,6 @@ public class InteractionManager : MonoBehaviour {
     }
 
     void InteractCalled() {
-        //print("Interacting");
+        print("Interacting");
     }
 }
