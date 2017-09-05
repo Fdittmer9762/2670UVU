@@ -5,61 +5,60 @@ using System;
 
 public class PlayerMovement : MonoBehaviour {
 
-    public CharacterController playerCC;
-    float speed = 5f;
-    public float gravity = .5f;
-    public float jumpForce = .2f;
-    Vector3 tempPos;
+    public CharacterController playerCC;                                                        //Player Object Character Controler
+    float speed = 5f;                                                                           //the speed that the character moves through the level
+    public float gravity = .5f;                                                                 //the force of gravity applied to the player
+    public float jumpForce = .2f;                                                               //force applied in the y axis when the player jumps
+    Vector3 tempPos;                                                                            //used by CC.Move(); to move the character
 
-    float offsetX;
-    float offsetZ;
+    float offsetX;                                                                              //the magnitude of the x offset, used to maintain overall speed of 5 with respect to angle
+    float offsetZ;                                                                              //the magnitude of the y offset, ""
 
     private int JumpCount = 0;                                                                  //for Jump Limit ****Remove Later*****
     private int JumpLimit = 1;                                                                  //for Jump Limit ****Remove Later*****
 
-    public static Action<Vector3> PlayerLocationAction;
-    public static Action PlayerAction;
+    public static Action<Vector3> PlayerLocationAction;                                         //Action used to pass player location to 
+    public static Action PlayerAction;                                                          //Action used to call platform sticking (PlatformMovementTracking.OnPlayerMovementEvent)
 
     void Start()
     {
-        playerCC = GetComponent<CharacterController>();
-        ControlManager.EnableDefaultControls += OnPlayAction;                               
+        playerCC = GetComponent<CharacterController>();                                         //sets the ref for the character controller
+        ControlManager.EnableDefaultControls += OnPlayAction;                                   //Listens for the event to enable the scripts
     }
 
-    void OnPlayAction()//Enables Controls                                                       //**think of better name for enable default controls**
+    void OnPlayAction()                                                                         //Enables Controls  ****think of better name for enable default controls****
     {
         PlayerMoveInput.HorizontalInput += Movement;                                            //enables movement (possibly make its own method for easier reuse) **don't over complicate things early**
         PlayerMoveInput.JumpAction += Jump;                                                     //enables jumping  (possibly make its own method for easier reuse)
-        Orientator.OrientAction += MovementOffsetSet;
-        PlatformMovementTracking.MovePlayerEvent += OffsetPlayerPos;
-        offsetX = speed;
-        ControlManager.EnableDefaultControls -= OnPlayAction;
+        Orientator.OrientAction += MovementOffsetSet;                                           //listens to the orientator for the action call
+        PlatformMovementTracking.MovePlayerEvent += OffsetPlayerPos;                            //listens to the platform movement tracking to find how much the current platform has moved
+        offsetX = speed;                                                                        //prevents issues with the x offset **** first platform must be at 0 degrees y axis
+        ControlManager.EnableDefaultControls -= OnPlayAction;                                   //UnSubs from the play action button to prevent it from subbing multiple times
     }
 
-    void Movement(float obj)
-    {
-        ApplyGravity();
-        PlayerActionCall();
-        tempPos.x = obj * offsetX * Time.deltaTime;     
-        tempPos.z = obj * offsetZ * Time.deltaTime;
-        playerCC.Move(tempPos);
-        PassLocation(); //passes player location to other scripts
+    void Movement(float obj){
+        ApplyGravity();                                                                         //Calls the method to apply gravity
+        PlayerActionCall();                                                                     //moves the player so that it stays on top of the current platform
+        tempPos.x = obj * offsetX * Time.deltaTime;                                             //sets the amount that the player needs to move in the x direction
+        tempPos.z = obj * offsetZ * Time.deltaTime;                                             //sets the amount that the player needs to move in the z direction
+        playerCC.Move(tempPos);                                                                 //moves the player by the tempPos Vector3
+        PassLocation();                                                                         //passes player location to other scripts
     }
 
-    void MovementOffsetSet(float offset){
-        offset *= Mathf.Deg2Rad;
-        offsetX = Mathf.Cos(offset) * speed;
-        offsetZ = Mathf.Tan(offset) * offsetX;
-        //offsetZ = Mathf.Sin(offset) * speed;
-        print("X: " + offsetX + " Y: " + offsetZ);
+    void MovementOffsetSet(float offset){                                                       //uses the passed offset angle and the player speed to set the x and z offsets
+        offset *= Mathf.Deg2Rad;                                                                //convert the offset angle from rad to deg
+        offsetX = Mathf.Cos(offset) * speed;                                                    //calculates the x offset
+        offsetZ = Mathf.Tan(offset) * offsetX;                                                  //calculates the z offset
+        //offsetZ = Mathf.Sin(offset) * speed;                                                    //alternate way to calculate the z axis
+        //print("X: " + offsetX + " Y: " + offsetZ);                                              //For Debugging
     }
 
     void ApplyGravity() {                                                                       //Applys Gravity to Object when called using character controller
-        tempPos.y -= gravity * Time.deltaTime;
+        tempPos.y -= gravity * Time.deltaTime;                                                  //decrements from tempPos.y using force of gravity
     }
 
     void Jump() {                                                                               //For Double Jump
-        if (playerCC.isGrounded) {
+        if (playerCC.isGrounded) {                                                              
             JumpCount = 0;
             tempPos.y = 0;
             //print(JumpCount);                                                                   //testing
@@ -80,21 +79,19 @@ public class PlayerMovement : MonoBehaviour {
         }
     }*/
 
-    void PassLocation()//passes player location data to other scripts
-    {
-        if (PlayerLocationAction != null)
-        {
-            PlayerLocationAction(transform.position);
+    void PassLocation(){                                                                        //passes player location data to other scripts
+        if (PlayerLocationAction != null) {                                                     //prevents null call errors
+            PlayerLocationAction(transform.position);                                           //passes the players location
         }
     }
 
-    void PlayerActionCall() {//used for anything that needs to interact with the character each frame
+    void PlayerActionCall() {                                                                   //used for anything that needs to interact with the character each frame
         if (PlayerAction != null) {
-            PlayerAction();//currently used trigger event on platform
+            PlayerAction();                                                                     //calls action for anything that is listining (called on update) ****currently used by PlatformMovementTracking
         }
     }
 
-    void OffsetPlayerPos(Vector3 offset) {
-        playerCC.Move(-offset);
+    void OffsetPlayerPos(Vector3 offset) {                                                      //used to move the character with the currentl platform (keeps it attached to the platform)
+        playerCC.Move(-offset);                                                                 //moves player using the offset
     }
 }
