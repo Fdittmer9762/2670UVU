@@ -23,9 +23,11 @@ public class ControlManager : MonoBehaviour {
     }
 
     void EnableFishing() {
+        print("Id like to fish");
         if (EnableFishingControls != null) {
             EnableFishingControls();
         }
+        FishingManager.stopFishing += EnableControl;                    //subs to fishing script, when player stops playing game
     }
 
     void changeControls(int interactType){                              //(1. activate 2. grab 3.fishing)

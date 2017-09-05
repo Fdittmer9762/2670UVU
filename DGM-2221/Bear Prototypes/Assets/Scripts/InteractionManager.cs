@@ -23,6 +23,7 @@ public class InteractionManager : MonoBehaviour {                           //**
         if (InteractAction != null) {
             InteractAction(interactType);
         }
+        PlayerMoveInput.InteractAction -= InteractCalled;//prevents it from being called multiple times and causing issues *(trapping the player in the interaction box)
         //print("Interacting");
     }
 }
