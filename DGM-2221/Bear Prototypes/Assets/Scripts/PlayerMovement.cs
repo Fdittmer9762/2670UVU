@@ -7,7 +7,7 @@ public class PlayerMovement : MonoBehaviour {
 
     public CharacterController playerCC;                                                        //Player Object Character Controler
     float speed = 5f;                                                                           //the speed that the character moves through the level
-    public float gravity = .5f;                                                                 //the force of gravity applied to the player
+    public static float gravity = .5f;                                                          //the force of gravity applied to the player
     public float jumpForce = .2f;                                                               //force applied in the y axis when the player jumps
     Vector3 tempPos;                                                                            //used by CC.Move(); to move the character
 
@@ -18,6 +18,7 @@ public class PlayerMovement : MonoBehaviour {
     private int JumpLimit = 1;                                                                  //for Jump Limit ****Remove Later*****
 
     public static Action<Vector3> PlayerLocationAction;                                         //Action used to pass player location to 
+    public static Action<Vector3> DeltaPlayer;                                                  //Action used to pass the players vector (how much he has moved since the last frame)
     public static Action PlayerAction;                                                          //Action used to call platform sticking (PlatformMovementTracking.OnPlayerMovementEvent)
 
     void Start()
@@ -28,14 +29,14 @@ public class PlayerMovement : MonoBehaviour {
 
     void OnDefaultControls()                                                                    //Enables Controls  ****think of better name for enable default controls****
     {
-        PlayerMoveInput.HorizontalInput = Movement;    //                                        //enables movement (possibly make its own method for easier reuse) **don't over complicate things early**
+        PlayerMoveInput.HorizontalInput = Movement;                                             //enables movement (possibly make its own method for easier reuse) **don't over complicate things early**
         PlayerMoveInput.JumpAction += Jump;                                                     //enables jumping  (possibly make its own method for easier reuse)
         Orientator.OrientAction += MovementOffsetSet;                                           //listens to the orientator for the action call
         PlatformMovementTracking.MovePlayerEvent += OffsetPlayerPos;                            //listens to the platform movement tracking to find how much the current platform has moved
         offsetX = speed;                                                                        //prevents issues with the x offset **** first platform must be at 0 degrees y axis
         ControlManager.EnableDefaultControls -= OnDefaultControls;                              //UnSubs from the play action button to prevent it from subbing multiple times
-        ControlManager.EnableFishingControls += OnFishing;
-        ControlManager.EnableGrabControls += OnGrab;
+        ControlManager.EnableFishingControls += OnFishing;                                      //Allows for transition to fishing control scheme
+        ControlManager.EnableGrabControls += OnGrab;                                            //Allows for transition to Grab control scheme
     }
 
     void OnFishing() {
@@ -64,6 +65,7 @@ public class PlayerMovement : MonoBehaviour {
         PlayerActionCall();                                                                     //moves the player so that it stays on top of the current platform
         tempPos.x = obj * offsetX * Time.deltaTime;                                             //sets the amount that the player needs to move in the x direction
         tempPos.z = obj * offsetZ * Time.deltaTime;                                             //sets the amount that the player needs to move in the z direction
+        DeltaPlayerCall(tempPos);                                                               //Passes the movement data to the pushed object (MoveWithPlayer)
         playerCC.Move(tempPos);                                                                 //moves the player by the tempPos Vector3
         PassLocation();                                                                         //passes player location to other scripts
     }
@@ -105,6 +107,12 @@ public class PlayerMovement : MonoBehaviour {
     void PassLocation(){                                                                        //passes player location data to other scripts
         if (PlayerLocationAction != null) {                                                     //prevents null call errors
             PlayerLocationAction(transform.position);                                           //passes the players location
+        }
+    }
+
+    void DeltaPlayerCall(Vector3 tempVal) {
+        if (DeltaPlayer != null) {
+            DeltaPlayer(tempVal);
         }
     }
 

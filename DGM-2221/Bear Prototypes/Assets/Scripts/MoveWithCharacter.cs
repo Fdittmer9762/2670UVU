@@ -7,9 +7,11 @@ public class MoveWithCharacter : MonoBehaviour {
 
     public static Action CancelGrab;
 
+    //protected CharacterController objCC; //may replace
+    Vector3 moveVector;
+
     Quaternion myRotate;
     Vector3 rotValue;
-
 
     void OnTriggerEnter() {
         ControlManager.EnableGrabControls += Grab;
@@ -23,6 +25,7 @@ public class MoveWithCharacter : MonoBehaviour {
     void Grab() {
         PlayerMoveInput.InteractAction += ReleaseObject;
         Orientator.OrientAction += TwistObject;
+        PlayerMovement.DeltaPlayer += MoveObject;
         print("grab Object");
     }
 
@@ -32,11 +35,22 @@ public class MoveWithCharacter : MonoBehaviour {
         transform.rotation = myRotate;
     }
 
+    void MoveObject(Vector3 posDelta) {
+        print("Moving: " + posDelta.x);
+        moveVector.x = posDelta.x;
+        transform.Translate(moveVector);
+    }
+
     void ReleaseObject() {
         if (CancelGrab != null) {
             CancelGrab();
             PlayerMoveInput.InteractAction -= ReleaseObject;
             Orientator.OrientAction -= TwistObject;
+            PlayerMovement.DeltaPlayer -= MoveObject;
         }
+    }
+
+    IEnumerator ReleasePhysics() {
+        yield return null;
     }
 }
