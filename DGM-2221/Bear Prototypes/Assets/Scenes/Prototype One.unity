@@ -150,7 +150,7 @@ Prefab:
     - target: {fileID: 114457611881266004, guid: a0c22743fd55ec64b966c405e2fdfb6f,
         type: 2}
       propertyPath: interactType
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 23552521522682808, guid: a0c22743fd55ec64b966c405e2fdfb6f,
         type: 2}

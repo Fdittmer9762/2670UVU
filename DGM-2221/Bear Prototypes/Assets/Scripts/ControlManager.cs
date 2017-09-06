@@ -30,6 +30,12 @@ public class ControlManager : MonoBehaviour {
         FishingManager.stopFishing += EnableControl;                    //subs to fishing script, when player stops playing game
     }
 
+    void EnableGrab() {
+        if (EnableGrabControls != null) {
+            EnableGrabControls();
+        }
+    }
+
     void changeControls(int interactType){                              //(1. activate 2. grab 3.fishing)
         switch (interactType) {
             case 3:                                                     //----Fishing-----//
@@ -38,6 +44,7 @@ public class ControlManager : MonoBehaviour {
                 break;
             case 2:                                                     //------Grab------//
                 print("Grabbing Called");
+                
                 break;
             case 1:                                                     //----Activate----//
                 print("Activate Called");
