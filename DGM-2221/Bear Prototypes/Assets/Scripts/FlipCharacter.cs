@@ -6,7 +6,7 @@ public class FlipCharacter : MonoBehaviour {
 
     Quaternion myRotate;
     Vector3 rotValue;
-    public float orientationOffset;
+    protected float orientationOffset;
 
     void Start()
     {

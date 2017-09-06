@@ -19,7 +19,6 @@ public class PlayerMovement : MonoBehaviour {
 
     public static Action<Vector3> PlayerLocationAction;                                         //Action used to pass player location to 
     public static Action PlayerAction;                                                          //Action used to call platform sticking (PlatformMovementTracking.OnPlayerMovementEvent)
-    public static Action GrabAction;
 
     void Start()
     {
