@@ -19,6 +19,7 @@ public class PlayerMovement : MonoBehaviour {
 
     public static Action<Vector3> PlayerLocationAction;                                         //Action used to pass player location to 
     public static Action PlayerAction;                                                          //Action used to call platform sticking (PlatformMovementTracking.OnPlayerMovementEvent)
+    public static Action GrabAction;
 
     void Start()
     {
@@ -35,6 +36,7 @@ public class PlayerMovement : MonoBehaviour {
         offsetX = speed;                                                                        //prevents issues with the x offset **** first platform must be at 0 degrees y axis
         ControlManager.EnableDefaultControls -= OnDefaultControls;                              //UnSubs from the play action button to prevent it from subbing multiple times
         ControlManager.EnableFishingControls += OnFishing;
+        ControlManager.EnableGrabControls += OnGrab;
     }
 
     void OnFishing() {
@@ -43,8 +45,22 @@ public class PlayerMovement : MonoBehaviour {
         Orientator.OrientAction -= MovementOffsetSet;                                           //unsubs from orient action; Just in case
         PlatformMovementTracking.MovePlayerEvent -= OffsetPlayerPos;                            // **may want to enable** could fish from a moving platform (disabled now just in case)
         ControlManager.EnableFishingControls -= OnFishing;                                      //unsubs from enable fishing controls, prevents issues
+        ControlManager.EnableGrabControls -= OnGrab;                                            //prevents player from grabbing something while fishing
         ControlManager.EnableDefaultControls += OnDefaultControls;                              //subs to default control change
         StartCoroutine (OnMovementDisable());                                                   //Call when movement is disabled **allows camera to smooth into place (looks better)**
+    }
+
+    void OnGrab (){
+        PlayerMoveInput.HorizontalInput = Movement;//**may cause issues**
+        PlayerMoveInput.JumpAction -= Jump;
+        Orientator.OrientAction -= MovementOffsetSet;                                           //unsubs from orient action; Just in case
+        PlatformMovementTracking.MovePlayerEvent -= OffsetPlayerPos;                            // **may want to enable** could push from a moving platform (disabled now just in case)
+        ControlManager.EnableGrabControls -= OnGrab;
+        ControlManager.EnableFishingControls -= OnFishing;
+        ControlManager.EnableDefaultControls += OnDefaultControls;
+        if(GrabAction != null){
+            GrabAction();
+        }
     }
 
     void Movement(float obj){

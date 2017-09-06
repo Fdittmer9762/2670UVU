@@ -4,12 +4,19 @@ using UnityEngine;
 
 public class MoveWithCharacter : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-        ControlManager.EnableGrabControls += Grab;
-	}
+    // Use this for initialization
+
+    void OnTriggerEnter() {
+        PlayerMovement.GrabAction += Grab;
+    }
+
+    void OnTriggerExit()
+    {
+        PlayerMovement.GrabAction -= Grab;
+    }
 
     void Grab() {
         print("grab Object");
+        //maintain offset from player
     }
 }

@@ -31,6 +31,7 @@ public class ControlManager : MonoBehaviour {
     }
 
     void EnableGrab() {
+        print("GrabbingObject");
         if (EnableGrabControls != null) {
             EnableGrabControls();
         }
@@ -44,7 +45,7 @@ public class ControlManager : MonoBehaviour {
                 break;
             case 2:                                                     //------Grab------//
                 print("Grabbing Called");
-                
+                EnableGrab();
                 break;
             case 1:                                                     //----Activate----//
                 print("Activate Called");
