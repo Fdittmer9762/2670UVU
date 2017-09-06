@@ -1,22 +1,31 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class MoveWithCharacter : MonoBehaviour {
 
-    // Use this for initialization
+    public static Action CancelGrab;
 
     void OnTriggerEnter() {
-        PlayerMovement.GrabAction += Grab;
+        ControlManager.EnableGrabControls += Grab;
     }
 
-    void OnTriggerExit()
-    {
-        PlayerMovement.GrabAction -= Grab;
+    void OnTriggerExit(){
+        ControlManager.EnableGrabControls -= Grab;
+        ReleaseObject();
     }
 
     void Grab() {
+        PlayerMoveInput.InteractAction += ReleaseObject;
         print("grab Object");
-        //maintain offset from player
+    }
+
+    void ReleaseObject() {
+        print("Let It Go!");
+        if (CancelGrab != null) {
+            CancelGrab();
+            PlayerMoveInput.InteractAction -= ReleaseObject;
+        }
     }
 }

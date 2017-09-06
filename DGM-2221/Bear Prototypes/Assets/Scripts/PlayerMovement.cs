@@ -29,7 +29,7 @@ public class PlayerMovement : MonoBehaviour {
 
     void OnDefaultControls()                                                                    //Enables Controls  ****think of better name for enable default controls****
     {
-        PlayerMoveInput.HorizontalInput += Movement;                                            //enables movement (possibly make its own method for easier reuse) **don't over complicate things early**
+        PlayerMoveInput.HorizontalInput = Movement;    //                                        //enables movement (possibly make its own method for easier reuse) **don't over complicate things early**
         PlayerMoveInput.JumpAction += Jump;                                                     //enables jumping  (possibly make its own method for easier reuse)
         Orientator.OrientAction += MovementOffsetSet;                                           //listens to the orientator for the action call
         PlatformMovementTracking.MovePlayerEvent += OffsetPlayerPos;                            //listens to the platform movement tracking to find how much the current platform has moved
@@ -51,16 +51,13 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     void OnGrab (){
-        PlayerMoveInput.HorizontalInput = Movement;//**may cause issues**
+        //PlayerMoveInput.HorizontalInput += Movement;//**may cause issues**
         PlayerMoveInput.JumpAction -= Jump;
-        Orientator.OrientAction -= MovementOffsetSet;                                           //unsubs from orient action; Just in case
-        PlatformMovementTracking.MovePlayerEvent -= OffsetPlayerPos;                            // **may want to enable** could push from a moving platform (disabled now just in case)
+        Orientator.OrientAction = MovementOffsetSet;                                           //unsubs from orient action; Just in case
+        //PlatformMovementTracking.MovePlayerEvent -= OffsetPlayerPos;                            // **may want to enable** could push from a moving platform (disabled now just in case)
         ControlManager.EnableGrabControls -= OnGrab;
         ControlManager.EnableFishingControls -= OnFishing;
         ControlManager.EnableDefaultControls += OnDefaultControls;
-        if(GrabAction != null){
-            GrabAction();
-        }
     }
 
     void Movement(float obj){

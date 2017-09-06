@@ -9,7 +9,6 @@ public class FishingManager : MonoBehaviour {
 
     void Start(){
         ControlManager.EnableFishingControls += StartFishing;
-        print("Fishing Started");
     }
 
     void StartFishing() {

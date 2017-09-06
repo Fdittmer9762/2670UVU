@@ -17,6 +17,7 @@ public class ControlManager : MonoBehaviour {
 	}
 
     void EnableControl() {
+        print("default Controls called");
         if (EnableDefaultControls!= null){
             EnableDefaultControls();                                    //Calls action to enable default controls (movement, jumping, ...)
         }
@@ -26,14 +27,15 @@ public class ControlManager : MonoBehaviour {
         print("Id like to fish");
         if (EnableFishingControls != null) {
             EnableFishingControls();
+            FishingManager.stopFishing += EnableControl;                    //subs to fishing script, when player stops playing game
         }
-        FishingManager.stopFishing += EnableControl;                    //subs to fishing script, when player stops playing game
     }
 
     void EnableGrab() {
         print("GrabbingObject");
         if (EnableGrabControls != null) {
             EnableGrabControls();
+            MoveWithCharacter.CancelGrab += EnableControl;
         }
     }
 
