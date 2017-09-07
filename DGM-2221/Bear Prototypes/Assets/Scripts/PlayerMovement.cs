@@ -53,7 +53,7 @@ public class PlayerMovement : MonoBehaviour {
     void OnGrab (){
         //PlayerMoveInput.HorizontalInput += Movement;//**may cause issues**
         PlayerMoveInput.JumpAction -= Jump;
-        Orientator.OrientAction = MovementOffsetSet;                                           //unsubs from orient action; Just in case
+        Orientator.OrientAction += MovementOffsetSet;                                           //unsubs from orient action; Just in case
         //PlatformMovementTracking.MovePlayerEvent -= OffsetPlayerPos;                            // **may want to enable** could push from a moving platform (disabled now just in case)
         ControlManager.EnableGrabControls -= OnGrab;
         ControlManager.EnableFishingControls -= OnFishing;
