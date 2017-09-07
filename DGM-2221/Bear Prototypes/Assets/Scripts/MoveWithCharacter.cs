@@ -30,9 +30,12 @@ public class MoveWithCharacter : MonoBehaviour {
     }
 
     void TwistObject(float offset) {
-        rotValue.y = offset;
+        ReleaseObject();//Temp fix
+        //---not working Debug Later---//
+        /*rotValue.y = offset;
         myRotate.eulerAngles = rotValue;
-        transform.rotation = myRotate;
+        transform.rotation = myRotate;*/
+        //-----------------------------//
     }
 
     void MoveObject(Vector3 posDelta) {
