@@ -39,6 +39,13 @@ public class ControlManager : MonoBehaviour {
         }
     }
 
+    void ActivateCall() {
+        if (ActivateAction != null) {
+            ActivateAction();
+            print("Activating Object");
+        }
+    }
+
     void changeControls(int interactType){                              //(1. activate 2. grab 3.fishing)
         switch (interactType) {
             case 3:                                                     //----Fishing-----//
@@ -51,6 +58,7 @@ public class ControlManager : MonoBehaviour {
                 break;
             case 1:                                                     //----Activate----//
                 print("Activate Called");
+                ActivateCall();
                 break;
             default:                                                    //-----Default----//
                 EnableControl();
