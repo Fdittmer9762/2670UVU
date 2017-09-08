@@ -35,6 +35,7 @@ public class FallingTree : MonoBehaviour {
                 rotValue.z = Mathf.Lerp(0, felledAngle, percentFallen);         //calculates the angle the tree needs to be at
                 myRotate.z = rotValue.z;                                        
                 print("current angle: " + myRotate.z);                          //***for debugging***
+                myRotate.eulerAngles = rotValue;
                 transform.rotation = myRotate;// ********this is where the issue is!!!!!!!!*********
                 //*****Having issues getting and setting correct values from transform.rotation*****
                 print("Actual angle: " + transform.rotation.z);                 //*debug*
