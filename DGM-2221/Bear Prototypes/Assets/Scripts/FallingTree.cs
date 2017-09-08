@@ -5,7 +5,7 @@ using UnityEngine;
 public class FallingTree : MonoBehaviour {
 
     public float felledAngle;                                                   //publicly difined float that holds the angle that the tree will fall after pushed
-    private float fallSpeed = 2f;                                               //the rate of acceleration for the falling (gravity) **still testing**
+    private float fallSpeed = .9f;                                               //the rate of acceleration for the falling (gravity) **still testing**
     protected float fallTime;                                                   //time to fall, calculated using felledAngle and fallSpeed
     float percentFallen;                                                        //used for lerping
 
@@ -34,11 +34,11 @@ public class FallingTree : MonoBehaviour {
                 percentFallen += tempAngle;                                     //applys acceleration to the velocity
                 rotValue.z = Mathf.Lerp(0, felledAngle, percentFallen);         //calculates the angle the tree needs to be at
                 myRotate.z = rotValue.z;                                        
-                print("current angle: " + myRotate.z);                          //***for debugging***
+                //print("current angle: " + myRotate.z);                          //***for debugging***
                 myRotate.eulerAngles = rotValue;
                 transform.rotation = myRotate;// ********this is where the issue is!!!!!!!!*********
                 //*****Having issues getting and setting correct values from transform.rotation*****
-                print("Actual angle: " + transform.rotation.z);                 //*debug*
+                //print("Actual angle: " + transform.rotation.z);                 //*debug*
                 yield return null;                                              //waits unitil the next frame to loop through again
             }
         print("Crash!!!!!");                                                    //*debug*
