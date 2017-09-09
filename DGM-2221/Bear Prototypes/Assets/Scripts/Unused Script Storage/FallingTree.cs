@@ -5,7 +5,7 @@ using UnityEngine;
 public class FallingTree : MonoBehaviour {
 
     public float felledAngle;                                                   //publicly difined float that holds the angle that the tree will fall after pushed
-    private float fallSpeed = .9f;                                               //the rate of acceleration for the falling (gravity) **still testing**
+    private float fallSpeed = 2f;                                               //the rate of acceleration for the falling (gravity) **still testing**
     protected float fallTime;                                                   //time to fall, calculated using felledAngle and fallSpeed
     float percentFallen;                                                        //used for lerping
 
