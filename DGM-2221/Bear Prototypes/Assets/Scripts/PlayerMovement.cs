@@ -37,6 +37,7 @@ public class PlayerMovement : MonoBehaviour {
         ControlManager.EnableDefaultControls -= OnDefaultControls;                              //UnSubs from the play action button to prevent it from subbing multiple times
         ControlManager.EnableFishingControls += OnFishing;                                      //Allows for transition to fishing control scheme
         ControlManager.EnableGrabControls += OnGrab;                                            //Allows for transition to Grab control scheme
+        Ladder.AttachAction += OnLadderGrab;
     }
 
     void OnFishing() {
@@ -47,7 +48,8 @@ public class PlayerMovement : MonoBehaviour {
         ControlManager.EnableFishingControls -= OnFishing;                                      //unsubs from enable fishing controls, prevents issues
         ControlManager.EnableGrabControls -= OnGrab;                                            //prevents player from grabbing something while fishing
         ControlManager.EnableDefaultControls += OnDefaultControls;                              //subs to default control change
-        StartCoroutine (OnMovementDisable());                                                   //Call when movement is disabled **allows camera to smooth into place (looks better)**
+        Ladder.AttachAction -= OnLadderGrab;
+        StartCoroutine(OnMovementDisable());                                                   //Call when movement is disabled **allows camera to smooth into place (looks better)**
     }
 
     void OnGrab (){
@@ -57,6 +59,17 @@ public class PlayerMovement : MonoBehaviour {
         //PlatformMovementTracking.MovePlayerEvent -= OffsetPlayerPos;                            // **may want to enable** could push from a moving platform (disabled now just in case)
         ControlManager.EnableGrabControls -= OnGrab;
         ControlManager.EnableFishingControls -= OnFishing;
+        Ladder.AttachAction -= OnLadderGrab;
+        ControlManager.EnableDefaultControls += OnDefaultControls;
+    }
+
+    void OnLadderGrab() {
+        print("ladder grabbed");
+        PlayerMoveInput.HorizontalInput -= Movement;
+        //sub to vertical movement
+        ControlManager.EnableGrabControls -= OnGrab;
+        ControlManager.EnableFishingControls -= OnFishing;
+        Ladder.AttachAction -= OnLadderGrab;
         ControlManager.EnableDefaultControls += OnDefaultControls;
     }
 

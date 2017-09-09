@@ -19,6 +19,7 @@ public class FlipCharacter : MonoBehaviour {
         ControlManager.EnableDefaultControls -= OnDefaultControls;                              //unsub from enable default controls, Prevents Issues with the control input
         ControlManager.EnableFishingControls += OnFishing;                                      //Subs to on fishing event call
         ControlManager.EnableGrabControls += OnFishing;
+        Ladder.AttachAction += OnAttach;
     }
 
     void OnFishing() {
@@ -26,6 +27,7 @@ public class FlipCharacter : MonoBehaviour {
         ControlManager.EnableFishingControls -= OnFishing;                                      //unsub from the onfishing event call, prevents issues
         ControlManager.EnableDefaultControls += OnDefaultControls;                              //subs to the default controls call, allows default controlls to be enabled
         ControlManager.EnableGrabControls += OnGrab;
+        Ladder.AttachAction += OnAttach;
     }
 
     void OnGrab() {
@@ -33,6 +35,15 @@ public class FlipCharacter : MonoBehaviour {
         ControlManager.EnableGrabControls -= OnGrab;
         ControlManager.EnableFishingControls += OnFishing;
         ControlManager.EnableDefaultControls += OnDefaultControls;
+        Ladder.AttachAction += OnAttach;
+    }
+
+    void OnAttach() {
+        PlayerMoveInput.HorizontalInput -= Flip;
+        ControlManager.EnableGrabControls -= OnGrab;
+        ControlManager.EnableFishingControls -= OnFishing;
+        ControlManager.EnableDefaultControls += OnDefaultControls;
+        Ladder.AttachAction -= OnAttach;
     }
 
     void Flip(float obj)

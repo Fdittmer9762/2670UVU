@@ -14,6 +14,8 @@ public class ControlManager : MonoBehaviour {
         //EnableControl();                                                //enables default controls on startup (will be changed later)
         Invoke("EnableControl", .5f);
         InteractionManager.InteractAction +=changeControls;
+        Ladder.DetachAction += EnableControl;
+        if (Ladder.DetachAction != null) { print("detach action subbed"); }
 	}
 
     void EnableControl() {
