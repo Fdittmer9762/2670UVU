@@ -38,6 +38,7 @@ public class PlayerMovement : MonoBehaviour {
         ControlManager.EnableFishingControls += OnFishing;                                      //Allows for transition to fishing control scheme
         ControlManager.EnableGrabControls += OnGrab;                                            //Allows for transition to Grab control scheme
         Ladder.AttachAction += OnLadderGrab;
+        PlayerMoveInput.VerticalInputAction -= Climb;
     }
 
     void OnFishing() {
@@ -66,11 +67,14 @@ public class PlayerMovement : MonoBehaviour {
     void OnLadderGrab() {
         print("ladder grabbed");
         PlayerMoveInput.HorizontalInput -= Movement;
+        PlayerMoveInput.VerticalInputAction += Climb;
         //sub to vertical movement
         ControlManager.EnableGrabControls -= OnGrab;
         ControlManager.EnableFishingControls -= OnFishing;
         Ladder.AttachAction -= OnLadderGrab;
         ControlManager.EnableDefaultControls += OnDefaultControls;
+        tempPos.x = 0f;
+        tempPos.z = 0f;
     }
 
     void Movement(float obj){
@@ -92,13 +96,21 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     void ApplyGravity() {                                                                       //Applys Gravity to Object when called using character controller
-        tempPos.y -= gravity * Time.deltaTime;                                                  //decrements from tempPos.y using force of gravity
+        if (playerCC.isGrounded != true){
+            tempPos.y -= gravity * Time.deltaTime;                                                  //decrements from tempPos.y using force of gravity
+        }
+    }
+
+    void Climb(float obj) {
+        tempPos.y = obj * .5f * speed * Time.deltaTime;
+        playerCC.Move(tempPos);
+        PassLocation();
     }
 
     void Jump() {                                                                               //For Double Jump
         if (playerCC.isGrounded) {                                                              
             JumpCount = 0;
-            tempPos.y = 0;
+            //tempPos.y = 0;
             //print(JumpCount);                                                                   //testing
         }
         if (JumpCount <= JumpLimit) {

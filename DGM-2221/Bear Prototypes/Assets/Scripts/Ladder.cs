@@ -17,7 +17,7 @@ public class Ladder : MonoBehaviour {
 
     void OnTriggerExit() {
         PlayerMoveInput.JumpAction -= OnJump;
-        
+        OnJump();
     }
 
     void OnJump() {

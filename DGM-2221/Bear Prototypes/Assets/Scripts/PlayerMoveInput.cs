@@ -8,12 +8,14 @@ public class PlayerMoveInput : MonoBehaviour {
     public static Action<float> HorizontalInput;
     public static Action JumpAction;
     public static Action InteractAction;
+    public static Action<float> VerticalInputAction;
 	
 	void Update () {
         PlayerInput();
 	}
 
     void PlayerInput() {
+        VerticalInput();
         HorizontalInputMethod();
         JumpInput();
         InteractInput();
@@ -24,6 +26,12 @@ public class PlayerMoveInput : MonoBehaviour {
         if (HorizontalInput != null){
             HorizontalInput(Input.GetAxis("Horizontal"));
             //print("Horizontal Input Called");
+        }
+    }
+
+    void VerticalInput() {
+        if (VerticalInputAction != null) {
+            VerticalInputAction(Input.GetAxis("Vertical"));
         }
     }
 
