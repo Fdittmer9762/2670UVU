@@ -12,6 +12,7 @@ public class PlayerMoveInput : MonoBehaviour {
     public static Action InteractAction;
     public static Action<float> VerticalInputAction;
     public static Action ThrowAction;
+    public static Action CycleInvAction;
 
     void Start() {
         StartCoroutine(PsudoUpdate());
@@ -30,6 +31,7 @@ public class PlayerMoveInput : MonoBehaviour {
         JumpInput();
         InteractInput();
         ThrowInput();
+        CycleInput();
     }
 
     void HorizontalInputMethod() {
@@ -66,4 +68,9 @@ public class PlayerMoveInput : MonoBehaviour {
         }
     }
 
+    void CycleInput() {
+        if (Input.GetKeyDown(KeyCode.V) && CycleInvAction != null) {
+            CycleInvAction();
+        }
+    }
 }
