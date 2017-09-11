@@ -48,22 +48,23 @@ public class Inventory : MonoBehaviour {
             case 1:
                 if (fish == 0) { selectedObject++; CycleInventory(); break; }
                 print("Fish: "+ fish);
-                selectedObject++;
+                selectedObject = 2;
                 break;
             case 2:
                 if (rocks == 0) { selectedObject++; CycleInventory(); break; }
                 print("Rocks: " + rocks);
-                selectedObject++;
+                selectedObject = 3;
                 break;
             case 3:
                 if (berries == 0) { selectedObject++; CycleInventory(); break; }
                 print("Berries: " + berries);
-                selectedObject++;
+                selectedObject = 1;
                 break;
             default:
                 if (fish != 0) { selectedObject = 1; CycleInventory(); break; }
                 if (rocks != 0) { selectedObject = 2; CycleInventory(); break; }
                 if (berries != 0) { selectedObject = 3; CycleInventory(); break; }
+                selectedObject = 1;
                 print("you've got nothing");
                 break;
         }
