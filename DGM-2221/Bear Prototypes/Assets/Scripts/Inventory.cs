@@ -17,12 +17,15 @@ public class Inventory : MonoBehaviour {
         switch (Mathf.Abs(Item)) {
             case 1:
                 berries += AddOrSub(Item);
+                if (berries < 0) { berries = 0; };
                 break;
             case 2:
                 fish += AddOrSub(Item);
+                if (fish < 0) { fish = 0; };
                 break;
             case 3:
                 rocks += AddOrSub(Item);
+                if (rocks < 0) { rocks = 0; };
                 break;
             default:
                 print("you done did goofed, I cant add this");
