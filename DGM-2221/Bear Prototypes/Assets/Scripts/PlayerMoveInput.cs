@@ -5,15 +5,24 @@ using System;
 
 public class PlayerMoveInput : MonoBehaviour {
 
+    private bool GameIsActive = true;
+
     public static Action<float> HorizontalInput;
     public static Action JumpAction;
     public static Action InteractAction;
     public static Action<float> VerticalInputAction;
     public static Action ThrowAction;
-	
-	void Update () {
-        PlayerInput();
-	}
+
+    void Start() {
+        StartCoroutine(PsudoUpdate());
+    }
+
+    IEnumerator PsudoUpdate() {
+        while (GameIsActive) {
+            PlayerInput();
+            yield return null;
+        }
+    }
 
     void PlayerInput() {
         VerticalInput();
@@ -21,7 +30,6 @@ public class PlayerMoveInput : MonoBehaviour {
         JumpInput();
         InteractInput();
         ThrowInput();
-        //PassLocation();
     }
 
     void HorizontalInputMethod() {
