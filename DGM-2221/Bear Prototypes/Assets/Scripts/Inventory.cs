@@ -5,9 +5,11 @@ using UnityEngine;
 public class Inventory : MonoBehaviour {
 
     protected int berries, fish, rocks;
+    public int selectedObject;
 
 	void Start () {
         CollectObject.CollectAction += AddToInventory;
+        PlayerMoveInput.ThrowAction += Throw;
 	}
 
     void AddToInventory(int Item) {
@@ -34,5 +36,9 @@ public class Inventory : MonoBehaviour {
             if (obj < 0) { return -1; }
         }
         return 0;
+    }
+
+    void Throw() {
+        print("Throw the " + selectedObject);
     }
 }

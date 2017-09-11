@@ -9,6 +9,7 @@ public class PlayerMoveInput : MonoBehaviour {
     public static Action JumpAction;
     public static Action InteractAction;
     public static Action<float> VerticalInputAction;
+    public static Action ThrowAction;
 	
 	void Update () {
         PlayerInput();
@@ -19,6 +20,7 @@ public class PlayerMoveInput : MonoBehaviour {
         HorizontalInputMethod();
         JumpInput();
         InteractInput();
+        ThrowInput();
         //PassLocation();
     }
 
@@ -48,6 +50,12 @@ public class PlayerMoveInput : MonoBehaviour {
             //print("Interact called");
         }
         //print("Interact method called");
+    }
+
+    void ThrowInput() {
+        if (Input.GetKeyDown(KeyCode.X) && ThrowAction != null) {
+            ThrowAction();
+        }
     }
 
 }
