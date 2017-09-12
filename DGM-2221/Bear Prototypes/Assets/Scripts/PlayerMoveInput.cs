@@ -7,12 +7,15 @@ public class PlayerMoveInput : MonoBehaviour {
 
     private bool GameIsActive = true;
 
+    private bool isChargingThrow = false;
+
     public static Action<float> HorizontalInput;
     public static Action JumpAction;
     public static Action InteractAction;
     public static Action<float> VerticalInputAction;
     public static Action ThrowAction;
     public static Action CycleInvAction;
+    
 
     void Start() {
         StartCoroutine(PsudoUpdate());
@@ -66,6 +69,20 @@ public class PlayerMoveInput : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.X) && ThrowAction != null) {
             ThrowAction();
         }
+    }
+
+    IEnumerator ThrowReleaseCheck() {
+        isChargingThrow = true;
+        while (isChargingThrow) {
+            if (Input.GetKeyUp(KeyCode.X)) {//not detecting on first release, must press a second time to trigger correctly
+                isChargingThrow = false;
+                print("Throw");
+            }
+            yield return null;
+        }
+        yield return null;
+        if (ThrowAction != null) { ThrowAction(); }
+        yield return null;
     }
 
     void CycleInput() {

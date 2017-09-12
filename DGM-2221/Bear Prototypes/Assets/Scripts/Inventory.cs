@@ -9,6 +9,8 @@ public class Inventory : MonoBehaviour {
     protected int[] InventoryItems = new int[3];// 0 berries, 1 fish, 2 rocks
     public GameObject[] berries, fish, rocks;
     public GameObject throwSpawn;
+    private bool isChargingThrow = false;
+    private float charge = 2.5f, maxCharge = 5f, chargeRate = .8f, throwDelay = 1f;
 
 	void Start () {
         CollectObject.CollectAction += AddToInventory;
@@ -81,6 +83,7 @@ public class Inventory : MonoBehaviour {
                         AddToInventory(-selectedObject);
                         berries[i].transform.position = throwSpawn.transform.position;
                         berries[i].SetActive(true);
+                        StartCoroutine(ChargeThrow(berries[i]));
                         //set and add force to the item
                         break;
                     }
@@ -93,6 +96,7 @@ public class Inventory : MonoBehaviour {
                         AddToInventory(-selectedObject);
                         fish[i].transform.position = throwSpawn.transform.position;
                         fish[i].SetActive(true);
+                        StartCoroutine(ChargeThrow(fish[i]));
                         //set and add force to the item
                         break;
                     }
@@ -105,6 +109,7 @@ public class Inventory : MonoBehaviour {
                         AddToInventory(-selectedObject);
                         rocks[i].transform.position = throwSpawn.transform.position;
                         rocks[i].SetActive(true);
+                        StartCoroutine(ChargeThrow(rocks[i]));
                         //set and add force to the item
                         break;
                     }
@@ -114,6 +119,27 @@ public class Inventory : MonoBehaviour {
                 print("We're testing berries here, fool. You wait your turn!");
                 break;
         }
+    }
+
+    void Release() {
+        isChargingThrow = false;
+    }
+
+    IEnumerator ChargeThrow(GameObject obj) {
+        PlayerMoveInput.ThrowAction -= Throw;
+        PlayerMoveInput.ThrowAction += Release;
+        isChargingThrow = true;
+        while (isChargingThrow && charge < maxCharge) {
+            charge += chargeRate * Time.deltaTime;
+            print("I'ma Charrging Mah Lazers: " + charge);
+            yield return null;
+        }
+        //apply force to game object
+        print("Blargeawaiingi!!!");
+        yield return null;
+        PlayerMoveInput.ThrowAction -= Release;
+        yield return new WaitForSeconds(throwDelay);
+        PlayerMoveInput.ThrowAction += Throw;
     }
 
     /*void FindDisabled(Array item) {
