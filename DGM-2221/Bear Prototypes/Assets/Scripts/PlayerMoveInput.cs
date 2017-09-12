@@ -68,6 +68,7 @@ public class PlayerMoveInput : MonoBehaviour {
     void ThrowInput() {
         if (Input.GetKeyDown(KeyCode.X) && ThrowAction != null) {
             ThrowAction();
+            StartCoroutine(ThrowReleaseCheck());
         }
     }
 

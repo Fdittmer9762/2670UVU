@@ -84,7 +84,6 @@ public class Inventory : MonoBehaviour {
                         berries[i].transform.position = throwSpawn.transform.position;
                         berries[i].SetActive(true);
                         StartCoroutine(ChargeThrow(berries[i]));
-                        //set and add force to the item
                         break;
                     }
                 }
@@ -97,7 +96,6 @@ public class Inventory : MonoBehaviour {
                         fish[i].transform.position = throwSpawn.transform.position;
                         fish[i].SetActive(true);
                         StartCoroutine(ChargeThrow(fish[i]));
-                        //set and add force to the item
                         break;
                     }
                 }
@@ -110,7 +108,6 @@ public class Inventory : MonoBehaviour {
                         rocks[i].transform.position = throwSpawn.transform.position;
                         rocks[i].SetActive(true);
                         StartCoroutine(ChargeThrow(rocks[i]));
-                        //set and add force to the item
                         break;
                     }
                 }
@@ -128,15 +125,12 @@ public class Inventory : MonoBehaviour {
     IEnumerator ChargeThrow(GameObject obj) {
         PlayerMoveInput.ThrowAction -= Throw;
         PlayerMoveInput.ThrowAction += Release;
+        charge = 2.5f;
         isChargingThrow = true;
         while (isChargingThrow && charge < maxCharge) {
             charge += chargeRate * Time.deltaTime;
-            print("I'ma Charrging Mah Lazers: " + charge);
             yield return null;
         }
-        //apply force to game object
-        print("Blargeawaiingi!!!");
-        yield return null;
         PlayerMoveInput.ThrowAction -= Release;
         yield return new WaitForSeconds(throwDelay);
         PlayerMoveInput.ThrowAction += Throw;
