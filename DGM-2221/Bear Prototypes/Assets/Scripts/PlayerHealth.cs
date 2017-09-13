@@ -7,6 +7,7 @@ public class PlayerHealth : MonoBehaviour {
 
     private float playerHealth, maxHealth = 5f; //may include default health
     public static Action DeathAction;
+    public static Action ResetAction;
 
 	void Start () {
         playerHealth = maxHealth;
@@ -16,8 +17,12 @@ public class PlayerHealth : MonoBehaviour {
 	void OnDamage (float damValue) {
         playerHealth -= damValue;
         if (playerHealth <= 0f) {
-            print("Life gives and it takes");
-            if (DeathAction != null) { DeathAction(); }
+            StartCoroutine(DelayAfterDeath());
         }
 	}
+
+    IEnumerator DelayAfterDeath() {
+
+        yield return null;
+    }
 }
