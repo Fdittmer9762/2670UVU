@@ -18,6 +18,8 @@ public class PlayerMoveInput : MonoBehaviour {
     
 
     void Start() {
+        PlayerHealth.ResetAction += OnReset;
+        PlayerHealth.DeathAction += OnDeath;
         StartCoroutine(PsudoUpdate());
     }
 
@@ -90,5 +92,14 @@ public class PlayerMoveInput : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.V) && CycleInvAction != null) {
             CycleInvAction();
         }
+    }
+
+    void OnDeath() {
+        GameIsActive = false;
+    }
+
+    void OnReset() {
+        GameIsActive = true;
+        StartCoroutine(PsudoUpdate());
     }
 }

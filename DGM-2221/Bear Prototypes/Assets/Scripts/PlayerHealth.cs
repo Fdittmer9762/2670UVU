@@ -5,7 +5,8 @@ using System;
 
 public class PlayerHealth : MonoBehaviour {
 
-    private float playerHealth, maxHealth = 5f; //may include default health
+    private float playerHealth, maxHealth = 1f; //may include default health
+    private float deathDelay = 2f;
     public static Action DeathAction;
     public static Action ResetAction;
 
@@ -22,7 +23,8 @@ public class PlayerHealth : MonoBehaviour {
 	}
 
     IEnumerator DelayAfterDeath() {
-
-        yield return null;
+        if (DeathAction != null) { DeathAction(); }
+        yield return new WaitForSeconds(deathDelay);
+        if (ResetAction != null) { ResetAction(); }
     }
 }

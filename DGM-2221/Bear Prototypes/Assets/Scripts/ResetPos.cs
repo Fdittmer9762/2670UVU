@@ -9,7 +9,8 @@ public class ResetPos : MonoBehaviour {
 
 	void Start () {
         startingPos = transform.position;
-        PlayerHealth.DeathAction += OnReset;
+        startingRot = transform.rotation;
+        PlayerHealth.ResetAction += OnReset;
 	}
 	
 	void OnReset () {

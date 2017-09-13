@@ -13,6 +13,8 @@ public class Inventory : MonoBehaviour {
     private float charge = 2.5f, maxCharge = 5f, chargeRate = .8f, throwDelay = 1f;
 
 	void Start () {
+        PlayerHealth.DeathAction += OnDeath;
+        PlayerHealth.ResetAction += OnReset;
         CollectObject.CollectAction += AddToInventory;
         PlayerMoveInput.ThrowAction += Throw;
         PlayerMoveInput.CycleInvAction += CycleInventory;
@@ -131,6 +133,32 @@ public class Inventory : MonoBehaviour {
         obj.SetActive(true);
         yield return new WaitForSeconds(throwDelay);
         PlayerMoveInput.ThrowAction += Throw;
+    }
+
+    void ClearInventory() {
+        for (int i = 0; i < InventoryItems.Length; i++){
+            InventoryItems[i] = 0;
+        }
+    }
+
+    void ReactivateItems() {
+        for (int i = 0; i < berries.Length; i++){
+            if (berries[i].activeInHierarchy != true) { berries[i].SetActive(true); }
+        }
+        for (int i = 0; i < fish.Length; i++){
+            if (fish[i].activeInHierarchy != true) { fish[i].SetActive(true); }
+        }
+        for (int i = 0; i < berries.Length; i++){
+            if (rocks[i].activeInHierarchy != true) { rocks[i].SetActive(true); }
+        }
+    }
+
+    void OnDeath() {
+        ClearInventory();
+    }
+
+    void OnReset() {
+        ReactivateItems();
     }
 
 }
