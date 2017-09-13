@@ -81,8 +81,6 @@ public class Inventory : MonoBehaviour {
                 for (int i = 0; i < berries.Length; i++) {
                     if (berries[i].activeInHierarchy == false) {
                         AddToInventory(-selectedObject);
-                        berries[i].transform.position = throwSpawn.transform.position;
-                        berries[i].SetActive(true);
                         StartCoroutine(ChargeThrow(berries[i]));
                         break;
                     }
@@ -93,8 +91,6 @@ public class Inventory : MonoBehaviour {
                 for (int i = 0; i < fish.Length; i++){
                     if (fish[i].activeInHierarchy == false){
                         AddToInventory(-selectedObject);
-                        fish[i].transform.position = throwSpawn.transform.position;
-                        fish[i].SetActive(true);
                         StartCoroutine(ChargeThrow(fish[i]));
                         break;
                     }
@@ -105,8 +101,6 @@ public class Inventory : MonoBehaviour {
                 for (int i = 0; i < rocks.Length; i++){
                     if (rocks[i].activeInHierarchy == false){
                         AddToInventory(-selectedObject);
-                        rocks[i].transform.position = throwSpawn.transform.position;
-                        rocks[i].SetActive(true);
                         StartCoroutine(ChargeThrow(rocks[i]));
                         break;
                     }
@@ -130,22 +124,13 @@ public class Inventory : MonoBehaviour {
         while (isChargingThrow && charge < maxCharge) {
             charge += chargeRate * Time.deltaTime;
             yield return null;
+            print(charge);
         }
         PlayerMoveInput.ThrowAction -= Release;
+        obj.transform.position = throwSpawn.transform.position;
+        obj.SetActive(true);
         yield return new WaitForSeconds(throwDelay);
         PlayerMoveInput.ThrowAction += Throw;
     }
 
-    /*void FindDisabled(Array item) {
-                for (int i = 0; i < item.Length; i++) {
-                    if (item[i].activeInHierarchy == false) {
-                        AddToInventory(-selectedObject);
-                        item[i].transform.position = throwSpawn.transform.position;
-                        item[i].SetActive(true);
-                        //set and add force to the item
-                        break;
-                    }
-                }
-        }
-    }*/
 }
