@@ -148,7 +148,7 @@ public class Inventory : MonoBehaviour {
         for (int i = 0; i < fish.Length; i++){
             if (fish[i].activeInHierarchy != true) { fish[i].SetActive(true); }
         }
-        for (int i = 0; i < berries.Length; i++){
+        for (int i = 0; i < rocks.Length; i++){
             if (rocks[i].activeInHierarchy != true) { rocks[i].SetActive(true); }
         }
     }
