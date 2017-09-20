@@ -9,6 +9,7 @@ public class BearChase : MonoBehaviour {
 
     void Start () {
         AgroObject.AddAgroObject += OnNewTarget;
+        AgroObject.RemoveAgroObject += OnTargetEscape;
     }
 
     void OnNewTarget(GameObject newTarget, int tS) {
@@ -20,6 +21,15 @@ public class BearChase : MonoBehaviour {
         else { Targets.Add(newTarget); print(newTarget.name+ " is the only thing I see"); }
         
         FindDistance(newTarget, this.gameObject);
+    }
+
+    void OnTargetEscape(GameObject target) {
+        if (Targets.Count > 0) {
+            for (int i = 0; i < Targets.Count; i++) {
+                if (target == Targets[i]) { Targets.RemoveAt(i); //}
+                print(target.name + " has been Removed!");                }////*/*/*/*/*/*
+            }
+        } else{ print("Nothing Before, Nothing Now"); }
     }
 
     float FindDistance(GameObject objA, GameObject objB){
