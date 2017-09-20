@@ -10,10 +10,22 @@ public class AgroObject : MonoBehaviour {
     public int tastyScale = 0;
 
     void OnTriggerEnter() {
-        if (AddAgroObject != null) { AddAgroObject(this.gameObject,tastyScale); }
+        EnterAgro();
     }
 
     void OnTriggerExit() {
+        ExitAgro();
+    }
+
+    void OnDisable() {
+        ExitAgro();
+    }
+
+    void EnterAgro() {
+        if (AddAgroObject != null) { AddAgroObject(this.gameObject, tastyScale); }
+    }
+
+    void ExitAgro() {
         if (RemoveAgroObject != null) { RemoveAgroObject(this.gameObject); }
     }
 }

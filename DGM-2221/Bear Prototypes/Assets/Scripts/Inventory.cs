@@ -126,7 +126,7 @@ public class Inventory : MonoBehaviour {
         while (isChargingThrow && charge < maxCharge) {
             charge += chargeRate * Time.deltaTime;
             yield return null;
-            print(charge);
+            //print(charge);
         }
         PlayerMoveInput.ThrowAction -= Release;
         obj.transform.position = throwSpawn.transform.position;

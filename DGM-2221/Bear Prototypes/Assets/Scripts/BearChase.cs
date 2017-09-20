@@ -26,8 +26,10 @@ public class BearChase : MonoBehaviour {
     void OnTargetEscape(GameObject target) {
         if (Targets.Count > 0) {
             for (int i = 0; i < Targets.Count; i++) {
-                if (target == Targets[i]) { Targets.RemoveAt(i); //}
-                print(target.name + " has been Removed!");                }////*/*/*/*/*/*
+                if (target == Targets[i]) {
+                    Targets.RemoveAt(i);
+                    print(target.name + " has been Removed!");
+                }
             }
         } else{ print("Nothing Before, Nothing Now"); }
     }
