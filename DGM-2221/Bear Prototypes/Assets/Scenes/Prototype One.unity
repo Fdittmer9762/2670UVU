@@ -458,6 +458,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Targets: []
+  bestDist: 20
 --- !u!23 &387856135
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -635,7 +636,7 @@ Transform:
   m_GameObject: {fileID: 470883638}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0.012, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
   m_Children: []
   m_Father: {fileID: 1501451257}
   m_RootOrder: 1
@@ -670,7 +671,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 151dbe8561884754db8482e23221f133, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tastyScale: 0
+  objType: 3
 --- !u!1 &475186356
 GameObject:
   m_ObjectHideFlags: 0
@@ -984,6 +985,10 @@ Prefab:
       propertyPath: m_RootOrder
       value: 9
       objectReference: {fileID: 0}
+    - target: {fileID: 1012980837282846, guid: ef4c47f882e6ceb41ac054ede5a98aec, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ef4c47f882e6ceb41ac054ede5a98aec, type: 2}
   m_IsPrefabParent: 0
@@ -996,7 +1001,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4150397948174572, guid: ac5d8161592f1f94a989cb30efa812ce, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 4
+      value: -2.08
       objectReference: {fileID: 0}
     - target: {fileID: 4150397948174572, guid: ac5d8161592f1f94a989cb30efa812ce, type: 2}
       propertyPath: m_LocalPosition.y
@@ -1026,8 +1031,12 @@ Prefab:
       propertyPath: m_RootOrder
       value: 14
       objectReference: {fileID: 0}
-    - target: {fileID: 1926535668691602, guid: ac5d8161592f1f94a989cb30efa812ce, type: 2}
-      propertyPath: m_IsActive
+    - target: {fileID: 4871723990037278, guid: ac5d8161592f1f94a989cb30efa812ce, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4871723990037278, guid: ac5d8161592f1f94a989cb30efa812ce, type: 2}
+      propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
