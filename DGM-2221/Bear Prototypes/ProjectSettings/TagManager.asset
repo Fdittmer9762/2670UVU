@@ -19,8 +19,8 @@ TagManager:
   - Interaction
   - PhysicsObjects
   - Danger
-  - 
-  - 
+  - AgroObject
+  - AgroDetect
   - 
   - 
   - 
