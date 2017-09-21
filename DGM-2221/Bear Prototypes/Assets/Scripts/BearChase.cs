@@ -28,13 +28,11 @@ public class BearChase : MonoBehaviour {
             if (Targets[i].name == objType) {
                 bestDist = FindDistance(this.gameObject, Targets[i]);
                 if (FindDistance(this.gameObject, Targets[i]) < bestDist) {
-                    //bestDist = FindDistance(this.gameObject, Targets[i]);
-                    Targets.Insert(i-1, newTarget); //somthing wrong with the insert function
-                    //Targets.Add(newTarget);
+                    Targets.Insert(i-1, newTarget);
                     break;
                 }
             }
-            else { Targets.Add(newTarget); }
+            else { Targets.Add(newTarget); break; }
         }
     }
 
