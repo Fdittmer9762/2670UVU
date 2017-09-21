@@ -25,7 +25,8 @@ public class BearChase : MonoBehaviour {
 
     void AddToList(string objType, GameObject newTarget) {
         for (int i = 0; i < Targets.Count; i++) { 
-            if (Targets[i].name == objType) {
+            if (Targets[i].name == objType) {//***found the issue, its a refrence type not an equivilance*** 
+                print("They Match!!!");
                 bestDist = FindDistance(this.gameObject, Targets[i]);
                 if (FindDistance(this.gameObject, Targets[i]) < bestDist) {
                     Targets.Insert(i-1, newTarget);
