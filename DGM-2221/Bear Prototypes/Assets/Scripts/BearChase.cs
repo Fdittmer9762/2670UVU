@@ -5,6 +5,7 @@ using UnityEngine;
 public class BearChase : MonoBehaviour {
 
     public List<GameObject> Targets;
+    private UnityEngine.AI.NavMeshAgent bearAgent;
 
     public float bestDist = 20f;
     
@@ -12,6 +13,19 @@ public class BearChase : MonoBehaviour {
     void Start () {
         AgroObject.AddAgroObject += OnNewTarget;
         AgroObject.RemoveAgroObject += OnTargetEscape;
+        bearAgent = GetComponent<UnityEngine.AI.NavMeshAgent>();
+        print("default target count"+Targets.Count);
+    }
+
+    IEnumerator Chase() {
+        print("I am in persuit of the target"+ Targets.Count);
+        while (Targets.Count > 0) {
+            bearAgent.SetDestination(Targets[0].transform.position);
+            print("Gotta Have those " + Targets[0].name);
+            yield return null;
+        }
+        print("All Targets Down, returning to base");
+        yield return null;
     }
 
     void OnNewTarget(GameObject newTarget, string tS) {
@@ -33,8 +47,9 @@ public class BearChase : MonoBehaviour {
                     break;
                 }
             }
-            else { Targets.Add(newTarget); break; }
+            else { Targets.Add(newTarget); print("Targets Count: " + Targets.Count); }
         }
+        if (true) { StartCoroutine(Chase()); }
     }
 
     void OnTargetEscape(GameObject target) {
