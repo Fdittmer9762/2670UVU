@@ -1,10 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class FallingPlatformTrigger : MonoBehaviour {
 
     private Transform platformPos;                      //ref to the platforms position
+
+    public static Action<float> CollapseAction;
 
     private bool playerAttached = false;                //is the player on the block
     private float maxSupportTime = 1f;                  //the max time the block will hold the player before falling
@@ -30,6 +33,7 @@ public class FallingPlatformTrigger : MonoBehaviour {
 
     IEnumerator Collapse() {
         float attachTime = 0;                                                           //sets the time the player has been attached
+        if (CollapseAction != null) { CollapseAction(maxSupportTime); }                 //calls action
         while (playerAttached) {                                                        //while the player is attached
             if (attachTime <= maxSupportTime) { attachTime += Time.deltaTime; }         //if the player has been attached for less than the max time, incement the attched time counter
             else { playerAttached = false; }                                            //else, start falling
