@@ -79,7 +79,7 @@ public class PlayerMoveInput : MonoBehaviour {
         while (isChargingThrow) {
             if (Input.GetKeyUp(KeyCode.X)) {//not detecting on first release, must press a second time to trigger correctly
                 isChargingThrow = false;
-                print("Throw");
+                //print("Throw");
             }
             yield return null;
         }

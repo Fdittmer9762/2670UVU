@@ -18,10 +18,11 @@ public class BearChase : MonoBehaviour {
     }
 
     IEnumerator Chase() {
-        print("I am in persuit of the target"+ Targets.Count);
-        while (Targets.Count > 0) {
+        print("I am in persuit of "+ Targets.Count+ " targets");
+        print("Gotta Have those " + Targets[0].name);
+        while (Targets.Count > 0) {//this is the issue, the list.count will show the count as 0 when the leingth is 0 or 1
             bearAgent.SetDestination(Targets[0].transform.position);
-            print("Gotta Have those " + Targets[0].name);
+            //print("Gotta Have those " + Targets[0].name);
             yield return null;
         }
         print("All Targets Down, returning to base");
@@ -47,9 +48,9 @@ public class BearChase : MonoBehaviour {
                     break;
                 }
             }
-            else { Targets.Add(newTarget); print("Targets Count: " + Targets.Count); }
+            else { Targets.Add(newTarget); }
         }
-        if (true) { StartCoroutine(Chase()); }
+        if (true) { StartCoroutine(Chase()); print("Target Aquired!"); print("Targets Count: " + Targets.Count);    }
     }
 
     void OnTargetEscape(GameObject target) {
