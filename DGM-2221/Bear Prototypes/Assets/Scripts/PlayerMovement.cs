@@ -75,6 +75,7 @@ public class PlayerMovement : MonoBehaviour {
         ControlManager.EnableDefaultControls += OnDefaultControls;
         tempPos.x = 0f;
         tempPos.z = 0f;
+        JumpCount = 0;
     }
 
     void Movement(float obj){
