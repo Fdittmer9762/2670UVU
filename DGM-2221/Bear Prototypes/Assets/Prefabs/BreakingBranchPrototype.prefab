@@ -25,6 +25,7 @@ GameObject:
   - component: {fileID: 54515354396316002}
   - component: {fileID: 59660420904919072}
   - component: {fileID: 114613658266750568}
+  - component: {fileID: 114056582230806862}
   m_Layer: 11
   m_Name: BreakingBranchPrototype
   m_TagString: Untagged
@@ -133,6 +134,17 @@ HingeJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
+--- !u!114 &114056582230806862
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1491343711822600}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60f633570e886834d994ec22b5a75563, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114613658266750568
 MonoBehaviour:
   m_ObjectHideFlags: 1

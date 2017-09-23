@@ -24,7 +24,7 @@ public class BreakingBranch : MonoBehaviour {
     }
 
     IEnumerator Break(float delay) {                                        
-        yield return new WaitForSeconds(delay);                             //waits for delay time before breaking to sync with platform falling
+        yield return new WaitForSeconds(delay*.8f);                             //waits for delay time before breaking to sync with platform falling
         branchRB.isKinematic = false;                                       //activates physics on hinge joint
         branchRB.useGravity = true;
         yield return new WaitForSeconds(delay * fallTime);                  //waits for fall time
