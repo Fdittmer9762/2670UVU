@@ -9,6 +9,7 @@ public class PlayerMovement : MonoBehaviour {
     float speed = 5f;                                                                           //the speed that the character moves through the level
     public static float gravity = .5f;                                                          //the force of gravity applied to the player
     public float jumpForce = .2f;                                                               //force applied in the y axis when the player jumps
+    private float speedDamper= 1f;
     Vector3 tempPos;                                                                            //used by CC.Move(); to move the character
 
     float offsetX;                                                                              //the magnitude of the x offset, used to maintain overall speed of 5 with respect to angle
@@ -25,6 +26,7 @@ public class PlayerMovement : MonoBehaviour {
     {
         playerCC = GetComponent<CharacterController>();                                         //sets the ref for the character controller
         ControlManager.EnableDefaultControls += OnDefaultControls;                              //Listens for the event to enable the scripts
+        Swimming.SwimmingAction += OnSwimming;
     }
 
     void OnDefaultControls()                                                                    //Enables Controls  ****think of better name for enable default controls****
@@ -78,11 +80,33 @@ public class PlayerMovement : MonoBehaviour {
         JumpCount = 0;
     }
 
+    void OnSwimming() {
+        tempPos.y = 0f;
+        JumpLimit = 10000;
+        JumpCount = 0;
+        gravity = .05f;
+        jumpForce = gravity *.8f;
+        speedDamper = .5f;
+        Swimming.SwimmingAction -= OnSwimming;
+        Swimming.SwimmingAction += OnSwimmingDisable;
+    }
+
+    void OnSwimmingDisable() {
+        tempPos.y = 0f;
+        JumpLimit = 1;
+        JumpCount = 1;
+        gravity = .5f;
+        jumpForce = gravity * .4f;
+        speedDamper = 1f;
+        Swimming.SwimmingAction -= OnSwimmingDisable;
+        Swimming.SwimmingAction += OnSwimming;
+    }
+
     void Movement(float obj){
         ApplyGravity();                                                                         //Calls the method to apply gravity
         PlayerActionCall();                                                                     //moves the player so that it stays on top of the current platform
-        tempPos.x = obj * offsetX * Time.deltaTime;                                             //sets the amount that the player needs to move in the x direction
-        tempPos.z = obj * offsetZ * Time.deltaTime;                                             //sets the amount that the player needs to move in the z direction
+        tempPos.x = obj * offsetX * speedDamper * Time.deltaTime;                               //sets the amount that the player needs to move in the x direction and applies any changes to speed with the damper
+        tempPos.z = obj * offsetZ * speedDamper * Time.deltaTime;                               //sets the amount that the player needs to move in the z direction
         DeltaPlayerCall(tempPos);                                                               //Passes the movement data to the pushed object (MoveWithPlayer)
         playerCC.Move(tempPos);                                                                 //moves the player by the tempPos Vector3
         PassLocation();                                                                         //passes player location to other scripts
