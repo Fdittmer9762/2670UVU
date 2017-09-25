@@ -8,6 +8,7 @@ public class PlayerMovement : MonoBehaviour {
     public CharacterController playerCC;                                                        //Player Object Character Controler
     float speed = 5f;                                                                           //the speed that the character moves through the level
     public static float gravity = .5f;                                                          //the force of gravity applied to the player
+    private float playerGravity;
     public float jumpForce = .2f;                                                               //force applied in the y axis when the player jumps
     private float speedDamper= 1f;
     Vector3 tempPos;                                                                            //used by CC.Move(); to move the character
@@ -15,8 +16,8 @@ public class PlayerMovement : MonoBehaviour {
     float offsetX;                                                                              //the magnitude of the x offset, used to maintain overall speed of 5 with respect to angle
     float offsetZ;                                                                              //the magnitude of the y offset, ""
 
-    private int JumpCount = 0;                                                                  //for Jump Limit ****Remove Later*****
-    private int JumpLimit = 1;                                                                  //for Jump Limit ****Remove Later*****
+    private int JumpCount = 0;                                                                  //for Jump Limit 
+    private int JumpLimit = 1;                                                                  //for Jump Limit 
 
     public static Action<Vector3> PlayerLocationAction;                                         //Action used to pass player location to 
     public static Action<Vector3> DeltaPlayer;                                                  //Action used to pass the players vector (how much he has moved since the last frame)
@@ -27,9 +28,10 @@ public class PlayerMovement : MonoBehaviour {
         playerCC = GetComponent<CharacterController>();                                         //sets the ref for the character controller
         ControlManager.EnableDefaultControls += OnDefaultControls;                              //Listens for the event to enable the scripts
         Swimming.SwimmingAction += OnSwimming;
+        playerGravity = gravity;
     }
 
-    void OnDefaultControls()                                                                    //Enables Controls  ****think of better name for enable default controls****
+    void OnDefaultControls() 
     {
         PlayerMoveInput.HorizontalInput = Movement;                                             //enables movement (possibly make its own method for easier reuse) **don't over complicate things early**
         PlayerMoveInput.JumpAction += Jump;                                                     //enables jumping  (possibly make its own method for easier reuse)
@@ -80,26 +82,26 @@ public class PlayerMovement : MonoBehaviour {
         JumpCount = 0;
     }
 
-    void OnSwimming() {
-        tempPos.y = 0f;
-        JumpLimit = 10000;
-        JumpCount = 0;
-        gravity = .05f;
-        jumpForce = gravity *.8f;
-        speedDamper = .5f;
-        Swimming.SwimmingAction -= OnSwimming;
-        Swimming.SwimmingAction += OnSwimmingDisable;
+    void OnSwimming() {                                                                         //Alters movement when the player enters the water
+        tempPos.y = 0f;                                                                         //Stops the player from falling when it enters the water
+        JumpLimit = 10000;                                                                      //Allows the player to jump forever
+        JumpCount = 0;                                                                          //resets the jump count
+        playerGravity = .05f;                                                                   //makes the player float in water not sink (gravity / 10f)
+        jumpForce = playerGravity *.8f;                                                         //calculates the jump force using 
+        speedDamper = .5f;                                                                      //slows the player down
+        Swimming.SwimmingAction -= OnSwimming;                                                  //prevents this method from being called again
+        Swimming.SwimmingAction += OnSwimmingDisable;                                           //allows the player to add the object
     }
 
-    void OnSwimmingDisable() {
-        tempPos.y = 0f;
-        JumpLimit = 1;
-        JumpCount = 1;
-        gravity = .5f;
-        jumpForce = gravity * .4f;
-        speedDamper = 1f;
-        Swimming.SwimmingAction -= OnSwimmingDisable;
-        Swimming.SwimmingAction += OnSwimming;
+    void OnSwimmingDisable() {                                                                  //Alters movement when the player exits the water
+        tempPos.y = 0f;                                                                         //prevents the player from flying out of the water
+        JumpLimit = 1;                                                                          //resets the jump count
+        JumpCount = 1;                                                                          //resets the jump limit
+        playerGravity = gravity;                                                                //resets the player gravity
+        jumpForce = playerGravity * .4f;                                                        //resets teh players jump force
+        speedDamper = 1f;                                                                       //resets the players speed damper
+        Swimming.SwimmingAction -= OnSwimmingDisable;                                           //prevents method from being called again
+        Swimming.SwimmingAction += OnSwimming;                                                  //allows the player to enter the water again
     }
 
     void Movement(float obj){
@@ -122,7 +124,7 @@ public class PlayerMovement : MonoBehaviour {
 
     void ApplyGravity() {                                                                       //Applys Gravity to Object when called using character controller
         if (playerCC.isGrounded != true){
-            tempPos.y -= gravity * Time.deltaTime;                                                  //decrements from tempPos.y using force of gravity
+            tempPos.y -= playerGravity * Time.deltaTime;                                                  //decrements from tempPos.y using force of gravity
         }
     }
 
