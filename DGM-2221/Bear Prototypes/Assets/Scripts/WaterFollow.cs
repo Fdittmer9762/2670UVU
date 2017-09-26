@@ -25,7 +25,8 @@ public class WaterFollow : MonoBehaviour {
     void OnPlayerEscape() {
         SwimmerAgro.PlayerEscapeAction -= OnPlayerEscape;
         SwimmerAgro.PlayerDetectionAction += OnPlayerDetect;
-        if (playerChaseable ) { PlayerMovement.PlayerLocationAction -= FollowPlayer; }
+        if (playerChaseable) { PlayerMovement.PlayerLocationAction -= FollowPlayer; }
+        //PlayerMovement.PlayerLocationAction -= FollowPlayer;
         playerChaseable = false;
     }
 
