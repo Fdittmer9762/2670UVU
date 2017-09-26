@@ -48,7 +48,7 @@ public class BearChase : MonoBehaviour {
                     break;
                 }
             }
-            else { Targets.Add(newTarget); }
+            else { Targets.Add(newTarget); } //***always adds new target to the end because of above issue
         }
         if (true) { StartCoroutine(Chase()); print("Target Aquired!"); print("Targets Count: " + Targets.Count);    }
     }
