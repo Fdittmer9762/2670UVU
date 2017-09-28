@@ -35,7 +35,6 @@ public class WaterFollow : MonoBehaviour {
             PlayerMovement.PlayerLocationAction += FollowPlayer;
             playerChaseable = true;
         }
-        else { /*nothing*/ }
         PlayerMovement.PlayerLocationAction -= CompareDistance;
     }
 
@@ -53,5 +52,6 @@ public class WaterFollow : MonoBehaviour {
     void OnTriggerExit() {
         print("WaterExited");
         swimmerInWater = false;
+        swimmer.transform.Translate(Vector3.back * Time.deltaTime * swimmerSpeed);
     }
 }
