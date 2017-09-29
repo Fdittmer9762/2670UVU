@@ -22,7 +22,9 @@ public class SeeSawMover : MonoBehaviour {
     }
 
     void Start() {
-        scalePos = new Vector3[Mathf.RoundToInt( maxPosPoints)];
+        scalePos = new Vector3[Mathf.RoundToInt(maxPosPoints)];
+        //scalePosA = new Vector3[Mathf.RoundToInt(maxPosPoints)];
+        //scalePosB = new Vector3[Mathf.RoundToInt(maxPosPoints)];
         FindScalePos();
     }
 
@@ -31,6 +33,14 @@ public class SeeSawMover : MonoBehaviour {
             print((i + 1) / maxPosPoints);
             scalePos[i] = Vector3.Lerp(minPos.position, maxPos.position, (i + 1) / maxPosPoints); //plan to change to slerp with debugging
         }
+        /*xOffset = platformA.transform.position.x;
+        for (int i = 0; i < scalePosB.Length; i++) {
+            scalePosB[i] = scalePosA[i];
+            scalePosB[i].x -= xOffset;
+        }
+        for (int i = 0; i < scalePosA.Length; i++) {
+            scalePosA[i].x += xOffset;
+        }*/
     }
 
     void Balance(float _weight, int _label) {
@@ -57,10 +67,21 @@ public class SeeSawMover : MonoBehaviour {
     void MoveScales(float deltaWeight, GameObject changedPlatform, GameObject inversePlatform) {
         print(deltaWeight);
         xOffset = changedPlatform.transform.localPosition.x;
-        changedPlatform.transform.position = scalePos[Mathf.RoundToInt(deltaWeight)];     //will lerp to new pos after testing
-        changedPlatform.transform.localPosition += Vector3.right * xOffset;             //maintains offset
-        inversePlatform.transform.position = scalePos[Mathf.RoundToInt(maxPosPoints - deltaWeight)];
-        inversePlatform.transform.localPosition += Vector3.right * -xOffset;
+        //changedPlatform.transform.position = scalePos[Mathf.RoundToInt(deltaWeight)];     //will lerp to new pos after testing
+        //changedPlatform.transform.localPosition += Vector3.right * xOffset;             //maintains offset
+        StartCoroutine(MoveScale(changedPlatform, changedPlatform.transform.position, scalePos[Mathf.RoundToInt(deltaWeight)]));
+        //inversePlatform.transform.position = scalePos[Mathf.RoundToInt(maxPosPoints - deltaWeight)];
+        //inversePlatform.transform.localPosition += Vector3.right * -xOffset;
+        StartCoroutine(MoveScale(inversePlatform, inversePlatform.transform.position, scalePos[Mathf.RoundToInt(maxPosPoints - deltaWeight)]));
+    }
+
+    IEnumerator MoveScale(GameObject platform, Vector3 startLocation, Vector3 destination) {
+        float _travel = 0f;
+        while (_travel <= 1f) {
+            _travel += Time.deltaTime;
+            platform.transform.position = Vector3.Lerp(startLocation, destination, _travel);
+            yield return null;
+        }
     }
 
 }
