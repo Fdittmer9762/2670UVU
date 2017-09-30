@@ -33,7 +33,7 @@ public class PlayerMovement : MonoBehaviour {
 
     void OnDefaultControls() 
     {
-        PlayerMoveInput.HorizontalInput = Movement;                                             //enables movement (possibly make its own method for easier reuse) **don't over complicate things early**
+        PlayerMoveInput.HorizontalInput += Movement;                                             //enables movement (possibly make its own method for easier reuse) **don't over complicate things early**
         PlayerMoveInput.JumpAction += Jump;                                                     //enables jumping  (possibly make its own method for easier reuse)
         Orientator.OrientAction += MovementOffsetSet;                                           //listens to the orientator for the action call
         PlatformMovementTracking.MovePlayerEvent += OffsetPlayerPos;                            //listens to the platform movement tracking to find how much the current platform has moved
