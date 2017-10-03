@@ -10,9 +10,9 @@ public class FallingPlatformTrigger : MonoBehaviour {
     public static Action<float> CollapseAction;
 
     private bool playerAttached = false;                //is the player on the block
-    private float maxSupportTime = 1f;                  //the max time the block will hold the player before falling
+    public float maxSupportTime = 1f;                  //the max time the block will hold the player before falling
 
-    private float fallDistance = 20f;                   //the distance the block should fall before stopping
+    public float fallDistance = 20f;                   //the distance the block should fall before stopping
     private float distFallen;                           //the distance the block has already fallen
     private bool shouldFall;                            //bool used for a while loop to determine if it should continue to fall
     private float fallSpeed;                            //create float fall speed to be used in the next while loop

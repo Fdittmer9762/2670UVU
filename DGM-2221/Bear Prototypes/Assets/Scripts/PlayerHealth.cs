@@ -20,6 +20,7 @@ public class PlayerHealth : MonoBehaviour {
         if (playerHealth <= 0f) {
             StartCoroutine(DelayAfterDeath());
         }
+        print(playerHealth);
 	}
 
     IEnumerator DelayAfterDeath() {

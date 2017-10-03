@@ -23,5 +23,6 @@ public class PushTree : MonoBehaviour {
     void Timber() {
         print("Timber");
         trunkRB.useGravity = true;
+        trunkRB.isKinematic = false;
     }
 }
