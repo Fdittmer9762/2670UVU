@@ -11,7 +11,7 @@ public class PianoKey : MonoBehaviour {
     public int pitchOffset; //1 = C, 12 = root
     //enum Pitches {C,Dflat,D,Eflat,E,Fflat,F,Gflat,G,Aflat,A,Bflat,B,Root }
     private AudioSource _audio;
-    //Pitches pitch;
+    //Pitches[] pitch;
 
     void Start() {
         _audio = GetComponent<AudioSource>();
@@ -20,7 +20,12 @@ public class PianoKey : MonoBehaviour {
 
     void OnTriggerEnter() {
         PlayNote();
+        //PlayerMoveInput.InteractAction += PlayNote;
     }
+
+    /*void OnTriggerExit() {
+        PlayerMoveInput.InteractAction -= PlayNote;
+    }*/
 
     void PlayNote() {
         _audio.pitch = Mathf.Pow(2f, pitchOffset / 12.0f);

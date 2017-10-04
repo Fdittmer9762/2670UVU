@@ -94,7 +94,7 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     void OnSwimmingDisable() {                                                                  //Alters movement when the player exits the water
-        tempPos.y = 0f;                                                                         //prevents the player from flying out of the water
+        tempPos.y *= 2f;                                                                         //prevents the player from flying out of the water
         JumpLimit = 1;                                                                          //resets the jump count
         JumpCount = 1;                                                                          //resets the jump limit
         playerGravity = gravity;                                                                //resets the player gravity

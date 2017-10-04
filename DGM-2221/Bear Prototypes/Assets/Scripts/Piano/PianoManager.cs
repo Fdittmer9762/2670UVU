@@ -1,11 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class PianoManager : MonoBehaviour {
 
     public int[] answerKey;
     private int step = 0;
+
+    public static Action PianoSolved;
 
     void OnTriggerEnter() {
         PianoKey.PlayNoteAction += OnNotePlayed;
@@ -16,8 +19,13 @@ public class PianoManager : MonoBehaviour {
 
     void OnNotePlayed(int note) {
         if (note == answerKey[step]) { step++; print(note + " is correct"); }
-        else { step = 0; print("Wrong Note " + note + " is not the same as " + answerKey[step]); }
-        if (step >= answerKey.Length) { step = 0; PianoKey.PlayNoteAction -= OnNotePlayed; print("Success"); }
+        else { step = 0; print(note + " : thats not right"); }
+        if (step >= answerKey.Length) {
+            step = 0;
+            PianoKey.PlayNoteAction -= OnNotePlayed;
+            print("Success");
+            if (PianoSolved!= null) { PianoSolved(); }
+        }
     }
 
 }

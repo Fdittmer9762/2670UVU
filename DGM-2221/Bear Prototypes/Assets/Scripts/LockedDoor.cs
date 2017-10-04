@@ -9,7 +9,7 @@ public class LockedDoor : MonoBehaviour {
     public GameObject lockPos, unlockPos, door;
 
     void Start() {
-        Key.KeyAction += OnUnlock;
+        //Key.KeyAction += OnUnlock;
         door.transform.position = lockPos.transform.position;
     }
 
