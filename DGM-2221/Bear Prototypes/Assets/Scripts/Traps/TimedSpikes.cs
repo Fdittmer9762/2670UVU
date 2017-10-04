@@ -16,7 +16,8 @@ public class TimedSpikes : MonoBehaviour {
         extendedPos = spikes.localPosition;
         spikes.localPosition = Vector3.zero;
         TrapManager.ActivateTrapsAction += OnActivateAction;
-        //OnActivateAction(true);
+
+        OnActivateAction(true);
     }
 
     void OnActivateAction(bool _activate) {
