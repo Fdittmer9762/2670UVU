@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class LockedDoor : MonoBehaviour {
     
-    public float unlockDelay = .5f;
-    private float doorSpeed = 1.2f, travelDist = 0f;
+    public float doorSpeed = 1.2f, unlockDelay = .5f;
+    private float travelDist = 0f;
     public GameObject lockPos, unlockPos, door;
 
     void Start() {
-        //Key.KeyAction += OnUnlock;
+        Key.KeyAction += OnUnlock;
         door.transform.position = lockPos.transform.position;
     }
 

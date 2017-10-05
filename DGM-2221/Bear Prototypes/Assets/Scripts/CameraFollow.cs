@@ -28,7 +28,7 @@ public class CameraFollow : MonoBehaviour {
         while (travelDist <= 1f) {
             travelDist += Time.deltaTime* camSpeed;
             cameraOffset = Vector3.Lerp(currentOffset, newOffset, travelDist);
-            print("Camera reorientating" + travelDist);
+            //print("Camera reorientating" + travelDist);
             yield return null;
         }
     }

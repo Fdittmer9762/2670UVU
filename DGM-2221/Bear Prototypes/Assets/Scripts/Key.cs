@@ -8,6 +8,12 @@ public class Key : MonoBehaviour {
     public static Action KeyAction;
 
     void OnTriggerEnter() {
-        if (KeyAction != null) { KeyAction(); this.gameObject.SetActive(false); }
+        StartCoroutine(UnlockDoor());
+    }
+
+    IEnumerator UnlockDoor() {
+        yield return null;
+        if (KeyAction != null) { KeyAction(); /*this.gameObject.SetActive(false);*/ }
+        else { print("no active doors"); }
     }
 }
