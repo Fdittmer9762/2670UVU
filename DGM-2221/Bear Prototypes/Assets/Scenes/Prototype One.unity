@@ -1311,6 +1311,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dba95427d40083f4e955d30f7a6dc687, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spikes: {fileID: 0}
+  offset: 0
+  spikeSpeed: 0
+  cycleTime: 0.5
 --- !u!23 &840012086
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1420,6 +1424,53 @@ Prefab:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 864f5e82e573f6c47a56385c02c57aea, type: 2}
+  m_IsPrefabParent: 0
+--- !u!1001 &906691433
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4807273834945640, guid: a9a672c2a8d9ce84b963268afedbfd8d, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -18.73
+      objectReference: {fileID: 0}
+    - target: {fileID: 4807273834945640, guid: a9a672c2a8d9ce84b963268afedbfd8d, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 7.45
+      objectReference: {fileID: 0}
+    - target: {fileID: 4807273834945640, guid: a9a672c2a8d9ce84b963268afedbfd8d, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4807273834945640, guid: a9a672c2a8d9ce84b963268afedbfd8d, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4807273834945640, guid: a9a672c2a8d9ce84b963268afedbfd8d, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4807273834945640, guid: a9a672c2a8d9ce84b963268afedbfd8d, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4807273834945640, guid: a9a672c2a8d9ce84b963268afedbfd8d, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4807273834945640, guid: a9a672c2a8d9ce84b963268afedbfd8d, type: 2}
+      propertyPath: m_RootOrder
+      value: 48
+      objectReference: {fileID: 0}
+    - target: {fileID: 114839763142368700, guid: a9a672c2a8d9ce84b963268afedbfd8d,
+        type: 2}
+      propertyPath: newCamTarget
+      value: 
+      objectReference: {fileID: 1287793484}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: a9a672c2a8d9ce84b963268afedbfd8d, type: 2}
   m_IsPrefabParent: 0
 --- !u!1001 &907859860
 Prefab:
@@ -1884,6 +1935,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 102a0ecb80ef6d045ad7b2af7eb63f7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxSupportTime: 1
+  fallDistance: 20
 --- !u!23 &1082831669
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2213,6 +2266,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 102a0ecb80ef6d045ad7b2af7eb63f7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxSupportTime: 1
+  fallDistance: 20
 --- !u!23 &1101888698
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2732,6 +2787,11 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!4 &1287793484 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 4217613861286054, guid: 864f5e82e573f6c47a56385c02c57aea,
+    type: 2}
+  m_PrefabInternal: {fileID: 859238926}
 --- !u!1 &1348339406
 GameObject:
   m_ObjectHideFlags: 0
@@ -3192,7 +3252,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1501451252}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -16.18, y: 8.54, z: 0}
+  m_LocalPosition: {x: -12.46, y: 8.54, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1182627543}
@@ -3268,6 +3328,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dollHouseDoor: {fileID: 1348339406}
+  exitDelay: 2
 --- !u!23 &1502780569
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -3700,6 +3761,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cameraOffset: {x: 0, y: 3, z: -10}
+  cameraTargets: []
+  playerTransform: {fileID: 1501451257}
 --- !u!1001 &1740787332
 Prefab:
   m_ObjectHideFlags: 0
@@ -3777,6 +3840,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 102a0ecb80ef6d045ad7b2af7eb63f7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxSupportTime: 1
+  fallDistance: 20
 --- !u!23 &1750836583
 MeshRenderer:
   m_ObjectHideFlags: 0
