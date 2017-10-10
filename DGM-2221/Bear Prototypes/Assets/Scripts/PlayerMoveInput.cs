@@ -15,6 +15,7 @@ public class PlayerMoveInput : MonoBehaviour {
     public static Action<float> VerticalInputAction;
     public static Action ThrowAction;
     public static Action CycleInvAction;
+    public static Action<bool> SprintAction;
     
 
     void Start() {
@@ -37,6 +38,7 @@ public class PlayerMoveInput : MonoBehaviour {
         InteractInput();
         ThrowInput();
         CycleInput();
+        SprintInput();
     }
 
     void HorizontalInputMethod() {
@@ -71,6 +73,15 @@ public class PlayerMoveInput : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.X) && ThrowAction != null) {
             ThrowAction();
             StartCoroutine(ThrowReleaseCheck());
+        }
+    }
+
+    void SprintInput() {
+        if (Input.GetKeyDown(KeyCode.B) && SprintAction != null) {
+            SprintAction(true);
+        }
+        if (Input.GetKeyUp(KeyCode.B) && SprintAction != null) {
+            SprintAction(false);
         }
     }
 

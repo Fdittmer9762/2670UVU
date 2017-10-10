@@ -11,6 +11,8 @@ public class PlayerMovement : MonoBehaviour {
     private float playerGravity;
     public float jumpForce = .2f;                                                               //force applied in the y axis when the player jumps
     private float speedDamper= 1f;
+    private bool canSprint = true, sprinting = false;
+    private float stamina = 3f, maxStamina;
     Vector3 tempPos;                                                                            //used by CC.Move(); to move the character
 
     float offsetX;                                                                              //the magnitude of the x offset, used to maintain overall speed of 5 with respect to angle
@@ -29,6 +31,7 @@ public class PlayerMovement : MonoBehaviour {
         ControlManager.EnableDefaultControls += OnDefaultControls;                              //Listens for the event to enable the scripts
         Swimming.SwimmingAction += OnSwimming;
         playerGravity = gravity;
+        maxStamina = stamina;
     }
 
     void OnDefaultControls() 
@@ -43,6 +46,7 @@ public class PlayerMovement : MonoBehaviour {
         ControlManager.EnableGrabControls += OnGrab;                                            //Allows for transition to Grab control scheme
         Ladder.AttachAction += OnLadderGrab;
         PlayerMoveInput.VerticalInputAction -= Climb;
+        PlayerMoveInput.SprintAction = OnSprint;
     }
 
     void OnFishing() {
@@ -82,13 +86,38 @@ public class PlayerMovement : MonoBehaviour {
         JumpCount = 0;
     }
 
+    void OnSprint(bool _isSprinting) {
+        sprinting = _isSprinting;
+        if (_isSprinting && canSprint) { StartCoroutine(Sprint()); }
+    }
+
+    IEnumerator Sprint() {
+        speedDamper *= 1.5f;
+        canSprint = false;
+        while (sprinting) {
+            yield return null;
+            stamina -= Time.deltaTime;
+            //print(stamina + " :stamina");
+            if (stamina <= 0f) {
+                sprinting = false;
+                PlayerMoveInput.SprintAction -= OnSprint;
+            }
+        }
+        speedDamper /= 1.5f;
+        yield return new WaitForSeconds(maxStamina - stamina);
+        stamina = maxStamina;
+        PlayerMoveInput.SprintAction += OnSprint;
+        canSprint = true;
+        print("stamina reset");
+    }
+
     void OnSwimming() {                                                                         //Alters movement when the player enters the water
         tempPos.y = 0f;                                                                         //Stops the player from falling when it enters the water
         JumpLimit = 10000;                                                                      //Allows the player to jump forever
         JumpCount = 0;                                                                          //resets the jump count
         playerGravity = .05f;                                                                   //makes the player float in water not sink (gravity / 10f)
         jumpForce = playerGravity *.8f;                                                         //calculates the jump force using 
-        speedDamper = .5f;                                                                      //slows the player down
+        speedDamper *= .5f;                                                                      //slows the player down
         Swimming.SwimmingAction -= OnSwimming;                                                  //prevents this method from being called again
         Swimming.SwimmingAction += OnSwimmingDisable;                                           //allows the player to add the object
     }
@@ -99,7 +128,7 @@ public class PlayerMovement : MonoBehaviour {
         JumpCount = 1;                                                                          //resets the jump limit
         playerGravity = gravity;                                                                //resets the player gravity
         jumpForce = playerGravity * .4f;                                                        //resets teh players jump force
-        speedDamper = 1f;                                                                       //resets the players speed damper
+        speedDamper *= 2f;                                                                       //resets the players speed damper
         Swimming.SwimmingAction -= OnSwimmingDisable;                                           //prevents method from being called again
         Swimming.SwimmingAction += OnSwimming;                                                  //allows the player to enter the water again
     }
