@@ -34,7 +34,7 @@ public class CameraFollow : MonoBehaviour {
     IEnumerator UpdateCameraOffset(Vector3 currentOffset, Vector3 newOffset, float camSpeed) {
         float travelDist = 0f;
         while (travelDist <= 1f) {
-            travelDist += Time.deltaTime* camSpeed;
+            travelDist += Time.deltaTime* (1/camSpeed);
             cameraOffset = Vector3.Lerp(currentOffset, newOffset, travelDist);
             //print("Camera reorientating" + travelDist);
             yield return null;
@@ -76,7 +76,6 @@ public class CameraFollow : MonoBehaviour {
             for (int i = 0; i < cameraTargets.Count; i++){
                 if (targetGO == cameraTargets[i]){
                     cameraTargets.RemoveAt(i);
-                    print(targetGO.name + " has been Removed!");
                 }
             }
         }

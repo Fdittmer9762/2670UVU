@@ -13,6 +13,7 @@ public class PlayerMovement : MonoBehaviour {
     private float speedDamper= 1f;
     private bool canSprint = true, sprinting = false;
     private float stamina = 3f, maxStamina;
+    private bool grabbedObject = false;
     Vector3 tempPos;                                                                            //used by CC.Move(); to move the character
 
     float offsetX;                                                                              //the magnitude of the x offset, used to maintain overall speed of 5 with respect to angle
@@ -36,7 +37,8 @@ public class PlayerMovement : MonoBehaviour {
 
     void OnDefaultControls() 
     {
-        PlayerMoveInput.HorizontalInput += Movement;                                             //enables movement (possibly make its own method for easier reuse) **don't over complicate things early**
+        if (grabbedObject == false) { PlayerMoveInput.HorizontalInput += Movement; }                                             //enables movement (possibly make its own method for easier reuse) **don't over complicate things early**
+        grabbedObject = false;
         PlayerMoveInput.JumpAction += Jump;                                                     //enables jumping  (possibly make its own method for easier reuse)
         Orientator.OrientAction += MovementOffsetSet;                                           //listens to the orientator for the action call
         PlatformMovementTracking.MovePlayerEvent += OffsetPlayerPos;                            //listens to the platform movement tracking to find how much the current platform has moved
@@ -62,6 +64,7 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     void OnGrab (){
+        grabbedObject = true;
         //PlayerMoveInput.HorizontalInput += Movement;//**may cause issues**
         PlayerMoveInput.JumpAction -= Jump;
         Orientator.OrientAction += MovementOffsetSet;                                           //unsubs from orient action; Just in case
