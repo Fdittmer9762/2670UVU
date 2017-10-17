@@ -39,7 +39,6 @@ public class MoveWithCharacter : MonoBehaviour {
     }
 
     void MoveObject(Vector3 posDelta) {
-        print("Moving: " + posDelta.x);
         moveVector.x = posDelta.x;
         transform.Translate(moveVector);
     }
