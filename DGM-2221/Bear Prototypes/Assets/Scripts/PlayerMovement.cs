@@ -5,7 +5,8 @@ using System;
 
 public class PlayerMovement : MonoBehaviour {
 
-    public CharacterController playerCC;                                                        //Player Object Character Controler
+    public Animator anims;
+    private CharacterController playerCC;                                                        //Player Object Character Controler
     float speed = 5f;                                                                           //the speed that the character moves through the level
     public static float gravity = .5f;                                                          //the force of gravity applied to the player
     private float playerGravity;
@@ -29,6 +30,7 @@ public class PlayerMovement : MonoBehaviour {
     void Start()
     {
         playerCC = GetComponent<CharacterController>();                                         //sets the ref for the character controller
+        anims = GetComponentInChildren<Animator>();
         ControlManager.EnableDefaultControls += OnDefaultControls;                              //Listens for the event to enable the scripts
         Swimming.SwimmingAction += OnSwimming;
         playerGravity = gravity;
@@ -143,6 +145,7 @@ public class PlayerMovement : MonoBehaviour {
         tempPos.z = obj * offsetZ * speedDamper * Time.deltaTime;                               //sets the amount that the player needs to move in the z direction
         DeltaPlayerCall(tempPos);                                                               //Passes the movement data to the pushed object (MoveWithPlayer)
         playerCC.Move(tempPos);                                                                 //moves the player by the tempPos Vector3
+        anims.SetFloat("Speed", Mathf.Abs(obj*speedDamper));
         PassLocation();                                                                         //passes player location to other scripts
     }
 
