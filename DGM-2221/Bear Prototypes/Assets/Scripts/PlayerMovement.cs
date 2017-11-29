@@ -15,6 +15,7 @@ public class PlayerMovement : MonoBehaviour {
     private bool canSprint = true, sprinting = false;
     private float stamina = 3f, maxStamina;
     private bool grabbedObject = false;
+    private bool isSwimming = false;
     Vector3 tempPos;                                                                            //used by CC.Move(); to move the character
 
     float offsetX;                                                                              //the magnitude of the x offset, used to maintain overall speed of 5 with respect to angle
@@ -51,6 +52,7 @@ public class PlayerMovement : MonoBehaviour {
         Ladder.AttachAction += OnLadderGrab;
         PlayerMoveInput.VerticalInputAction -= Climb;
         PlayerMoveInput.SprintAction = OnSprint;
+        anims.SetBool("Climbing", false);
     }
 
     void OnFishing() {
@@ -89,6 +91,8 @@ public class PlayerMovement : MonoBehaviour {
         tempPos.x = 0f;
         tempPos.z = 0f;
         JumpCount = 0;
+        anims.SetBool("Climbing", true);
+        anims.SetFloat("Speed", 0f);
     }
 
     void OnSprint(bool _isSprinting) {
@@ -125,6 +129,8 @@ public class PlayerMovement : MonoBehaviour {
         speedDamper *= .5f;                                                                      //slows the player down
         Swimming.SwimmingAction -= OnSwimming;                                                  //prevents this method from being called again
         Swimming.SwimmingAction += OnSwimmingDisable;                                           //allows the player to add the object
+        isSwimming = true;
+        anims.SetBool("Swimming", true);
     }
 
     void OnSwimmingDisable() {                                                                  //Alters movement when the player exits the water
@@ -136,6 +142,8 @@ public class PlayerMovement : MonoBehaviour {
         speedDamper *= 2f;                                                                       //resets the players speed damper
         Swimming.SwimmingAction -= OnSwimmingDisable;                                           //prevents method from being called again
         Swimming.SwimmingAction += OnSwimming;                                                  //allows the player to enter the water again
+        isSwimming = false;
+        anims.SetBool("Swimming", false);
     }
 
     void Movement(float obj){
@@ -161,12 +169,14 @@ public class PlayerMovement : MonoBehaviour {
         if (playerCC.isGrounded != true){
             tempPos.y -= playerGravity * Time.deltaTime;                                                  //decrements from tempPos.y using force of gravity
         }
+        anims.SetBool("Jump", false);
     }
 
     void Climb(float obj) {
         tempPos.y = obj * .5f * speed * Time.deltaTime;
         playerCC.Move(tempPos);
         PassLocation();
+        anims.SetFloat("vertSpeed", obj);
     }
 
     void Jump() {                                                                               //For Double Jump
@@ -178,7 +188,8 @@ public class PlayerMovement : MonoBehaviour {
         if (JumpCount <= JumpLimit) {
             tempPos.y = jumpForce;
             JumpCount++;
-            //print("Jumping!");                                                                  //testing
+            anims.SetBool("Jump", true);
+            //print("Jumping!");
         }
         //print("Jump Called!");                                                                  //testing
     }
