@@ -53,6 +53,22 @@ public class PlayerMovement : MonoBehaviour {
         PlayerMoveInput.VerticalInputAction -= Climb;
         PlayerMoveInput.SprintAction = OnSprint;
         anims.SetBool("Climbing", false);
+        Damager.DamageAction += OnDamage;
+    }
+
+    void OnDamage(float obj) {
+        anims.SetTrigger("Injury");
+        JumpCount--;
+        Jump();
+        StartCoroutine(TempDisable(.5f));
+    }
+
+    IEnumerator TempDisable(float disableDelay) {
+        PlayerMoveInput.JumpAction -= Jump;
+        speedDamper = 0f;
+        yield return new WaitForSeconds(disableDelay);
+        PlayerMoveInput.JumpAction += Jump;
+        speedDamper = 1f;
     }
 
     void OnFishing() {
