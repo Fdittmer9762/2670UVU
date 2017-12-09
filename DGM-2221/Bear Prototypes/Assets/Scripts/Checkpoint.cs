@@ -6,6 +6,7 @@ using System;
 public class Checkpoint : MonoBehaviour {
 
     public static Action<Vector3, Quaternion> CheckpointReachedAction;
+    public static Action CheckpointAction;
     private Vector3 newResetPos;
     private Quaternion newResetRot;
 
@@ -15,5 +16,6 @@ public class Checkpoint : MonoBehaviour {
 
     void OnTriggerEnter() {
         if (CheckpointReachedAction != null) { CheckpointReachedAction(newResetPos, newResetRot); }
+        if (CheckpointAction != null) { CheckpointAction(); }
     }
 }
