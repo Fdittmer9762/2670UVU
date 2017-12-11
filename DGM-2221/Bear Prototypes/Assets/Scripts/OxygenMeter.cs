@@ -37,7 +37,6 @@ public class OxygenMeter : MonoBehaviour {
         while (swimming) {
             yield return null;
             if (currentO2 >= 0) {
-                print("canbreath");
                 currentO2 -= .1f * Time.deltaTime;
                 oxygenMeter.value = currentO2;
             }

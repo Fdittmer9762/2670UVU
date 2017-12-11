@@ -14,6 +14,7 @@ public class PlayerReset : MonoBehaviour {
         startingRot = transform.rotation;
         PlayerHealth.ResetAction += OnReset;
         Checkpoint.CheckpointReachedAction += OnCheckpoint;
+        ButtonMethods.ClickResetAction += OnReset;
     }
 
     void OnCheckpoint(Vector3 newPos) {

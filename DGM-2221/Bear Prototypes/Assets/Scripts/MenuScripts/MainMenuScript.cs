@@ -10,4 +10,5 @@ public class MainMenuScript {
     public void LoadScene(string _scene) {
         SceneManager.LoadScene(_scene, LoadSceneMode.Single);
     }        //Loads a scene using the scene's name as a string 
+
 }

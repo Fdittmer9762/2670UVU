@@ -21,6 +21,7 @@ public class PlayerMoveInput : MonoBehaviour {
     void Start() {
         PlayerHealth.ResetAction += OnReset;
         PlayerHealth.DeathAction += OnDeath;
+        PauseMeun.PauseAction += ChangeGameIsActive;
         StartCoroutine(PsudoUpdate());
     }
 
@@ -112,5 +113,14 @@ public class PlayerMoveInput : MonoBehaviour {
     void OnReset() {
         GameIsActive = true;
         StartCoroutine(PsudoUpdate());
+    }
+
+    void ChangeGameIsActive(bool _obj) {
+        if (!_obj) {
+            GameIsActive = false;
+        }else{
+            GameIsActive = true;
+            StartCoroutine(PsudoUpdate());
+        }
     }
 }
