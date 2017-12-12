@@ -8,3 +8,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/TempleInteriro.unity
     guid: ec8866d3882fa1e49b67393c9c94c3e1
+  - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: 4322bd2662e7c9a4e99e21330b49a66d
+  - enabled: 1
+    path: Assets/Scenes/Forest2.0.unity
+    guid: 70ebea55604f91c46a1da84cbc1f5b3a
+  - enabled: 1
+    path: Assets/Scenes/Swamp2.0.unity
+    guid: 6cef86c86db28664d9e5be5cbe8d5f36

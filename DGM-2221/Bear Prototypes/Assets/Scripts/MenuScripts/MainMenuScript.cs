@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class MainMenuScript {
+public class MainMenuScript : MonoBehaviour {
 
     public void LoadScene(int _scene) {
         SceneManager.LoadScene(_scene, LoadSceneMode.Single);
