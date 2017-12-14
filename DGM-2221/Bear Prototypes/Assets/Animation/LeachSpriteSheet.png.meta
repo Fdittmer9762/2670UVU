@@ -1,0 +1,427 @@
+fileFormatVersion: 2
+guid: dce0b6cd5ee8663429744ab5becc545e
+timeCreated: 1513244131
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: LeachSpriteSheet_0
+    21300002: LeachSpriteSheet_1
+    21300004: LeachSpriteSheet_2
+    21300006: LeachSpriteSheet_3
+    21300008: LeachSpriteSheet_4
+    21300010: LeachSpriteSheet_5
+    21300012: LeachSpriteSheet_6
+    21300014: LeachSpriteSheet_7
+    21300016: LeachSpriteSheet_8
+    21300018: LeachSpriteSheet_9
+    21300020: LeachSpriteSheet_10
+    21300022: LeachSpriteSheet_11
+    21300024: LeachSpriteSheet_12
+    21300026: LeachSpriteSheet_13
+    21300028: LeachSpriteSheet_14
+    21300030: LeachSpriteSheet_15
+    21300032: LeachSpriteSheet_16
+    21300034: LeachSpriteSheet_17
+    21300036: LeachSpriteSheet_18
+    21300038: LeachSpriteSheet_19
+    21300040: LeachSpriteSheet_20
+    21300042: LeachSpriteSheet_21
+    21300044: LeachSpriteSheet_22
+  serializedVersion: 4
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -1
+    wrapU: 1
+    wrapV: -1
+    wrapW: -1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Standalone
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: LeachSpriteSheet_0
+      rect:
+        serializedVersion: 2
+        x: 12
+        y: 788
+        width: 146
+        height: 176
+      alignment: 9
+      pivot: {x: 0.94680744, y: 0.44828206}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: LeachSpriteSheet_1
+      rect:
+        serializedVersion: 2
+        x: 187
+        y: 783
+        width: 69
+        height: 181
+      alignment: 9
+      pivot: {x: 0.8297975, y: 0.5502896}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: LeachSpriteSheet_2
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 728
+        width: 86
+        height: 237
+      alignment: 9
+      pivot: {x: 0.97628856, y: 0.57681364}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: LeachSpriteSheet_3
+      rect:
+        serializedVersion: 2
+        x: 416
+        y: 783
+        width: 108
+        height: 177
+      alignment: 9
+      pivot: {x: 0.8792665, y: 0.21715687}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: LeachSpriteSheet_4
+      rect:
+        serializedVersion: 2
+        x: 567
+        y: 796
+        width: 69
+        height: 146
+      alignment: 9
+      pivot: {x: 0.96171683, y: 0.10514727}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: LeachSpriteSheet_5
+      rect:
+        serializedVersion: 2
+        x: 670
+        y: 812
+        width: 99
+        height: 130
+      alignment: 9
+      pivot: {x: 1.0056885, y: 0.5466792}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: LeachSpriteSheet_6
+      rect:
+        serializedVersion: 2
+        x: 806
+        y: 816
+        width: 78
+        height: 109
+      alignment: 9
+      pivot: {x: 1.0251395, y: 0.98713166}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: LeachSpriteSheet_7
+      rect:
+        serializedVersion: 2
+        x: 935
+        y: 813
+        width: 78
+        height: 120
+      alignment: 9
+      pivot: {x: 0.96678984, y: 0.77812904}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: LeachSpriteSheet_8
+      rect:
+        serializedVersion: 2
+        x: 1044
+        y: 798
+        width: 100
+        height: 134
+      alignment: 9
+      pivot: {x: 1.0006323, y: 0.7037855}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: LeachSpriteSheet_9
+      rect:
+        serializedVersion: 2
+        x: 1180
+        y: 780
+        width: 112
+        height: 133
+      alignment: 9
+      pivot: {x: 1.0147192, y: 0.7623502}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: LeachSpriteSheet_10
+      rect:
+        serializedVersion: 2
+        x: 1321
+        y: 736
+        width: 118
+        height: 177
+      alignment: 9
+      pivot: {x: 1.0014038, y: 0.8342692}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: LeachSpriteSheet_11
+      rect:
+        serializedVersion: 2
+        x: 1477
+        y: 708
+        width: 129
+        height: 180
+      alignment: 9
+      pivot: {x: 0.9821692, y: 0.92140776}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: LeachSpriteSheet_12
+      rect:
+        serializedVersion: 2
+        x: 1604
+        y: 656
+        width: 122
+        height: 232
+      alignment: 9
+      pivot: {x: 0.9849643, y: 0.98389226}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: LeachSpriteSheet_13
+      rect:
+        serializedVersion: 2
+        x: 1756
+        y: 643
+        width: 152
+        height: 257
+      alignment: 9
+      pivot: {x: 0.9591129, y: 1.0017539}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: LeachSpriteSheet_14
+      rect:
+        serializedVersion: 2
+        x: 53
+        y: 424
+        width: 236
+        height: 261
+      alignment: 9
+      pivot: {x: 0.9949752, y: 0.92431384}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: LeachSpriteSheet_15
+      rect:
+        serializedVersion: 2
+        x: 298
+        y: 328
+        width: 392
+        height: 433
+      alignment: 9
+      pivot: {x: 0.716724, y: 0.7732823}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: LeachSpriteSheet_16
+      rect:
+        serializedVersion: 2
+        x: 740
+        y: 392
+        width: 511
+        height: 360
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: LeachSpriteSheet_17
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 168
+        width: 157
+        height: 160
+      alignment: 9
+      pivot: {x: 0.944491, y: 0.37673846}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: LeachSpriteSheet_18
+      rect:
+        serializedVersion: 2
+        x: 287
+        y: 151
+        width: 185
+        height: 149
+      alignment: 9
+      pivot: {x: 0.92641884, y: 0.32691208}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: LeachSpriteSheet_19
+      rect:
+        serializedVersion: 2
+        x: 471
+        y: 148
+        width: 194
+        height: 132
+      alignment: 9
+      pivot: {x: 0.90663666, y: 0.6379152}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: LeachSpriteSheet_20
+      rect:
+        serializedVersion: 2
+        x: 676
+        y: 124
+        width: 186
+        height: 176
+      alignment: 9
+      pivot: {x: 0.9241264, y: 0.7327322}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: LeachSpriteSheet_21
+      rect:
+        serializedVersion: 2
+        x: 903
+        y: 115
+        width: 143
+        height: 193
+      alignment: 9
+      pivot: {x: 0.89252776, y: 0.47641885}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: LeachSpriteSheet_22
+      rect:
+        serializedVersion: 2
+        x: 1286
+        y: 139
+        width: 565
+        height: 475
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    outline: []
+    physicsShape: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
