@@ -6,7 +6,12 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Abilities", menuName = "Scriptable Objects/Abilities/ThrustAbility")]
 public class SO_ThrustAbility : ABS_Abilities {
 
-    public override List<Vector3> UseAbility(string triggerName, Animator _anim, float _chargeTime, Transform _rayOrigin, Transform playerTransform)
+	public override void UseAbility ()
+	{
+		throw new NotImplementedException ();
+	}
+
+    /*public override List<Vector3> UseAbility(string triggerName, Animator _anim, float _chargeTime, Transform _rayOrigin, Transform playerTransform)
     {
 		float _charge = 0f;
 
@@ -41,6 +46,6 @@ public class SO_ThrustAbility : ABS_Abilities {
             return null;
         }
         return posList;
-    }
+    }*/
 
 }
