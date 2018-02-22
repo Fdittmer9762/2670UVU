@@ -6,7 +6,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Abilities", menuName = "Scriptable Objects/Abilities/ThrustAbility")]
 public class SO_ThrustAbility : ABS_Abilities {
 
-	public override void UseAbility ()
+	public override void UseAbility (Animator _anim)
 	{
 		throw new NotImplementedException ();
 	}

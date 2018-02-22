@@ -6,6 +6,8 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Player", menuName = "Scriptable Objects/Player")]
 public class SO_Player : ABS_Player 
 {
+	public Animator characterAnimatorController;
+
 	/*
 		makes the player jump when the jump button is pressed
 		parameter: vertical Velocity of player
