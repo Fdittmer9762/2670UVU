@@ -9,12 +9,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5fdeac4a2f2154a0e98183debab3ce4a, type: 3}
-  m_Name: TestExplosion
+  m_Name: ExplosionTest
   m_EditorClassIdentifier: 
-  maxCharge: 5
-  minDamage: 2
-  maxDamage: 5
-  minKB: 2
-  maxKB: 5
-  minRange: 2
-  maxRange: 5
+  maxCharge: 0
+  minDamage: 0
+  maxDamage: 0
+  minKB: 0
+  maxKB: 0
+  minRange: 0
+  maxRange: 0
+  explosionPrefab: {fileID: 1052212185673780, guid: 7571a45e91b0744b89b53d9fcc8bbffc,
+    type: 2}

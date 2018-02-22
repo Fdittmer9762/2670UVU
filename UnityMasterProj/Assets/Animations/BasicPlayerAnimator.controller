@@ -79,7 +79,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c9f8e7fc7dae47eba02524d95bc6217, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stateAbility: {fileID: 11400000, guid: 8d9e712947aa34f7bba257b18995b20f, type: 2}
+  stateAbility: {fileID: 11400000, guid: 55b91944295194ad2b29a950abce761c, type: 2}
 --- !u!1101 &1101111195644016872
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
