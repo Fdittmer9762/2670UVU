@@ -70,7 +70,6 @@ public class PlayerController : MonoBehaviour
 	void AbilityInput(){
 		if(Input.GetButtonDown("Ability01"))								//checks to see if the button was pressed
 		{																	//****button strings must match****\\
-			print("Ability01");
 			weaponAnims.SetTrigger("Ability01");
 		}
 		if(Input.GetButtonDown("Ability02"))								//checks to see if the button was pressed
